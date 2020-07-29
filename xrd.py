@@ -13,7 +13,7 @@ def xrd(
     atomcoords
 ):
     natom = np.shape(atomcoords)[0]
-    print('XRD| main subroutine activated, totally '+str(natom)+' in simulation box.')
+    print('XRD| main subroutine activated, totally '+str(natom)+' in simulation box. An accelerated version will come soon.')
     print('XRD| periodic boundary condition method is not implemented, for accuracy, please use SUPERCELL instead.')
     wavelength_ = wavelength * 1E-9
     print('XRD| units conversion: wavelength value input: '+str(wavelength)+' -> '+str(wavelength_)+' (m)')
