@@ -152,3 +152,21 @@ if simulation == 'xrd':
         import matplotlib.pyplot as plt
         plt.imshow(xrd2dpattern)
         plt.show()
+        
+elif simulation == 'mechanics':
+
+    # i plan to add all kinds of molecular dynamics simulations here, different integration schemes like
+    # frog, velocity-verlet, verlet and simple scheme will be supported.
+
+    # also, some optimization like ionic optimization and cell optimization will be treated as 
+    # NVT (T=0) and NPT (T=0)
+
+    # optimizer is the THING that i am working on now.
+
+    # the way energy calculated can be categorized into classical mechanics and quantum mechanics,
+    # for what i major in, i will write classical and quantum in periodic system first.
+    pass
+
+print('SIMU_PKG| simulation complete and terminates successfully.\n'
+     +'SIMU_PKG| any comments will be appreciated, contact me at https://github.com/kirk0830/simu_pkg\n'
+     +'SIMU_PKG| HAVE A NICE DAY, GOODBYE. :)')
