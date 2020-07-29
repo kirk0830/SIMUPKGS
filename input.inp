@@ -1,0 +1,32 @@
+run_type = xrd
+coordinate_file = sketch.xyz
+
+xrd_lambda = 0.1
+xrd_maxangle = 45
+xrd_scrz = 1
+xrd_resolution = 2
+angle_amp = False
+
+smooth_2dpattern = True
+smooth_sigma = 0.1
+fast_smooth = True
+fast_smooth_cutoff = 2
+denoise_2dpattern = False
+pxrd = True
+
+use_angle_resol = False
+
+supercell = True
+cell_a = 2
+cell_b = 2
+cell_c = 2
+cell_alpha = 90
+cell_beta = 90
+cell_gamma = 90
+
+nx = 2
+ny = 1
+nz = 1
+
+plotxrd2d = True
+plotpxrd = True
