@@ -13,6 +13,7 @@ integrated entry of simu_pkg, usage can be found in input file -> input.inp. Not
 presently functions supported are:
 1. supercell duplication, atomic coordinates centering... that all basic preprocessing functions needed for X-ray diffraction simulation
 2. X-ray diffraction simulation
+3. explicit use of supercell duplication
 
 centerCoords.py
 ---------------
@@ -29,6 +30,14 @@ read standard formatted xyz files and, (optional, default as false) convert coor
 for short:
 input requirement: standard xyz file, and filename
 output description: 2 dimensional list
+
+coordsWrite.py
+--------------
+write standard formatted xyz files, a 2-dimensional list that including atomic coordinates is compulsory. It also supports input element information from external standard input (i.e., from keyboard) if an n*3 list is detected in input parameter list.
+
+for short:
+input requirement: 2 dimensional list, coordinates must be float type, also a filename.
+output description: no print-out or return, just save a file.
 
 diffraction.py
 --------------
