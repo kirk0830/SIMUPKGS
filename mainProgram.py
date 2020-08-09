@@ -1,14 +1,14 @@
 from readinput import readin
+#-------------------------------------------------------------------------
+prefacefile = open('preface.txt','r',encoding='utf-8')
+line = prefacefile.readline().split('\n')[0]
+while line:
+    print(line)
+    line = prefacefile.readline().split('\n')[0]
+prefacefile.close()
+#-------------------------------------------------------------------------
 
-print('=----------------------------------------------------------=')
-print('|       (?)                (?)         (?)              (?)|')
-print('| Welcome to ->      (?)                         (?)       |')
-print('|(?)           (?)  CONFUSING SIMU PKGS  (?)           (?) |')
-print('|         (?)                      (?)        (?)          |')
-print('|     (?)              (?)           -> ykhuang@dicp.ac.cn |')
-print('=----------------------------------------------------------=')
-
-filename = input('SIMU_PKGS| waiting for type-in input filename...')
+filename = input('\n\nSIMU_PKGS| waiting for type-in input filename...')
 
 print('SIMU_PKGS| up to now, x-ray diffraction simulation, supercell duplication is implemented.')
 if len(filename) < 1:
@@ -69,7 +69,7 @@ else:
 if simulation == 'xrd':
 
     print('SIMU_PKGS| X-RAY DIFFRACTION SIMULATION activated. XRD-specific information read-in.')
-    from centercoords import centercoords
+    from coordsCenter import centercoords
     centeredcoords = centercoords(finalcoordsread)
 
     xrd_wavelength = float(keywordsdict['xrd_lambda'])
@@ -173,6 +173,25 @@ elif simulation == 'supercell':
     from coordsWrite import writecoords
     writecoords(finalcoordsread, projectname)
 
+elif simulation == 'free_energy_mole':
+
+    from fe_mole import freeEnergy
+    ener_elec = keywordsdict['ener0']
+    ener_elec = ener_elec[0]+' '+ener_elec[1]
+    temp = float(keywordsdict['temperature'])
+    press = float(keywordsdict['pressure'])
+    freqs = keywordsdict['frequencies']
+    #freqs = [ float(freq) for freq in freqs.split(' ') if freq != '' ]
+    freqs = [ float(freq) for freq in freqs ]
+    unit = keywordsdict['outunit']
+    freeEnergy(
+        atomlist=finalcoordsread,
+        enerinfo=ener_elec,
+        temp=temp,
+        pressure=press,
+        freqlist=freqs,
+        unituse=unit
+    )
 
 print('SIMU_PKG| simulation complete and terminates successfully.\n'
      +'SIMU_PKG| any comments will be appreciated, contact me at https://github.com/kirk0830/simu_pkg\n'

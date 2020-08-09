@@ -15,7 +15,9 @@ def readin(inputfilename):
             line = inputfile.readline()
             if len(oneline)>0:
                 keyword = oneline[0]
-                value = oneline[1]
+                value = oneline[1:]
+                if len(value)==1:
+                    value = oneline[1]
                 keywordslist[keyword] = value
         
         return keywordslist

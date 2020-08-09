@@ -1,4 +1,5 @@
-run_type = xrd
+run_type = free_energy_mole
+project = 8Ar
 coordinate_file = sketch.xyz
 
 xrd_lambda = 0.1
@@ -6,17 +7,17 @@ xrd_maxangle = 45
 xrd_scrz = 1
 xrd_resolution = 2
 angle_amp = False
-
 smooth_2dpattern = True
 smooth_sigma = 0.1
 fast_smooth = True
 fast_smooth_cutoff = 2
 denoise_2dpattern = False
 pxrd = True
-
 use_angle_resol = False
+plotxrd2d = True
+plotpxrd = True
 
-supercell = True
+supercell = False
 cell_a = 2
 cell_b = 2
 cell_c = 2
@@ -28,5 +29,8 @@ nx = 2
 ny = 1
 nz = 1
 
-plotxrd2d = True
-plotpxrd = True
+ener0 = 0 J
+temperature = 298
+pressure = 101325
+frequencies = 1200 1700 1800
+outunit = 1
