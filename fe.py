@@ -23,13 +23,13 @@ enerinfo = input('FreeEner| energy calculated by electronic method and unit of i
 enerinfo = [ word for word in enerinfo.split(' ') if word != '' ]
 ener0 = float(enerinfo[0])
 enerUnit = enerinfo[1]
-if enerUnit == 'j' or 'J':
+if enerUnit == 'j' or enerUnit == 'J':
      ener0 = ener0
-elif enerUnit == 'kj' or 'kJ' or 'KJ' or 'Kj':
+elif enerUnit == 'kj' or enerUnit == 'kJ' or enerUnit == 'KJ' or enerUnit == 'Kj':
      ener0 *= 1E3
-elif enerUnit == 'eV' or 'EV' or 'ev':
+elif enerUnit == 'eV' or enerUnit == 'EV' or enerUnit == 'ev':
      ener0 *= 1.6E-19
-elif enerUnit == 'a.u.' or 'au' or 'A.U.' or 'AU':
+elif enerUnit == 'a.u.' or enerUnit == 'au' or enerUnit == 'A.U.' or enerUnit == 'AU':
      ener0 *= 27.2113838565563*1.6E-19
 else:
      print('FreeEner| energy unit can not be recognized, please input unit such as J/kJ/eV/a.u., quit.')
@@ -151,25 +151,25 @@ if outunit == '1':
      outunit = ' J/mol\n'
 elif outunit == '2':
      # eV
-     ener0 /= 1.6E-19/6.02E23
-     ZPE /= 1.6E-19/6.02E23
-     E_rigid /= 1.6E-19/6.02E23
-     E_vib /= 1.6E-19/6.02E23
-     U /= 1.6E-19/6.02E23
-     H /= 1.6E-19/6.02E23
-     G /= 1.6E-19/6.02E23
-     A /= 1.6E-19/6.02E23
+     ener0 /= 1.6E-19*6.02E23
+     ZPE /= 1.6E-19*6.02E23
+     E_rigid /= 1.6E-19*6.02E23
+     E_vib /= 1.6E-19*6.02E23
+     U /= 1.6E-19*6.02E23
+     H /= 1.6E-19*6.02E23
+     G /= 1.6E-19*6.02E23
+     A /= 1.6E-19*6.02E23
      outunit = ' eV\n'
 elif outunit == '3':
      # a.u.
-     ener0 /= 1.6E-19/6.02E23/27.2113838565563
-     ZPE /= 1.6E-19/6.02E23/27.2113838565563
-     E_rigid /= 1.6E-19/6.02E23/27.2113838565563
-     E_vib /= 1.6E-19/6.02E23/27.2113838565563
-     U /= 1.6E-19/6.02E23/27.2113838565563
-     H /= 1.6E-19/6.02E23/27.2113838565563
-     G /= 1.6E-19/6.02E23/27.2113838565563
-     A /= 1.6E-19/6.02E23/27.2113838565563
+     ener0 /= 1.6E-19*6.02E23*27.2113838565563
+     ZPE /= 1.6E-19*6.02E23*27.2113838565563
+     E_rigid /= 1.6E-19*6.02E23*27.2113838565563
+     E_vib /= 1.6E-19*6.02E23*27.2113838565563
+     U /= 1.6E-19*6.02E23*27.2113838565563
+     H /= 1.6E-19*6.02E23*27.2113838565563
+     G /= 1.6E-19*6.02E23*27.2113838565563
+     A /= 1.6E-19*6.02E23*27.2113838565563
      outunit = ' a.u.\n'
 
 print('\nFreeEner| energies information:\n'
