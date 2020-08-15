@@ -193,6 +193,11 @@ elif simulation == 'free_energy_mole':
         unituse=unit
     )
 
+elif simulation == 'post-pros-q6':
+    import pairAnalysis
+    q6_cutoff = float(keywordsdict['q6_cutoff'])
+    print(pairAnalysis.q6_order_parameter(coords=finalcoordsread, cutoff=q6_cutoff))
+    
 print('SIMU_PKG| simulation complete and terminates successfully.\n'
      +'SIMU_PKG| any comments will be appreciated, contact me at https://github.com/kirk0830/simu_pkg\n'
      +'SIMU_PKG| HAVE A NICE DAY, GOODBYE. :)')

@@ -1,5 +1,8 @@
 import math
 
+# note: temperature 180 centidegree, 453.15K for CO oxidation
+
+
 print('=------------------------------------------------------------=\n'
      +'|                                                            |\n'
      +'|      Independent subroutine of Free energy calculation     |\n'
@@ -34,6 +37,8 @@ elif enerUnit == 'a.u.' or enerUnit == 'au' or enerUnit == 'A.U.' or enerUnit ==
 else:
      print('FreeEner| energy unit can not be recognized, please input unit such as J/kJ/eV/a.u., quit.')
      exit()
+print('FreeEner| electronic energy input has been converted into J: '+str(ener0)+' J')
+
 natom = int(input('FreeEner| number of atoms input: (2/3) '))
 masslist = input('FreeEner| atomic mass is required, input them and seperate with space: ')
 bondlist = input('FreeEner| bond length(s) is required, input them and seperate with space (in Angstrom): ')
@@ -140,7 +145,7 @@ E_rigid *= N_A
 E_vib *= N_A
 U *= N_A
 H *= N_A
-
+print('FreeEner| electronic energy has been converted into J·mol-1: '+str(ener0)+' J·mol-1')
 g_elec = 1
 # q_elec = g_elec*math.exp(-ener0/kb/temp) too large to calculate
 A = -N_A*kb*temp*math.log(q_trans*q_rot*q_vib, math.e)+ener0
@@ -192,8 +197,8 @@ print('FreeEner| entropies information:\n'
 
 
 print('FreeEner| free energy information:\n'
-     +'          Gibbs free energy     = '+str(G)+str(outunit)
-     +'          Helmholtz free energy = '+str(A)+str(outunit)
+     +'          Gibbs free energy     = '+str(G)+str(outunit)+'\n'
+     +'          Helmholtz free energy = '+str(A)+str(outunit)+'\n'
      +'          temperature           = '+str(temp)+' K\n'
      +'          pressure              = '+str(pressure)+' Pa'
      )

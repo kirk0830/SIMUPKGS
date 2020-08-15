@@ -1,4 +1,4 @@
-run_type = free_energy_mole
+run_type = post-pros-q6
 project = 8Ar
 coordinate_file = sketch.xyz
 
@@ -34,3 +34,5 @@ temperature = 298
 pressure = 101325
 frequencies = 1200 1700 1800
 outunit = 1
+
+q6_cutoff = 2
