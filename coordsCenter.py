@@ -2,6 +2,15 @@ import numpy as np
 
 def centercoords(coordsinp, masspower = False, totmass = 1, masslist = []):
 
+    """
+    This function is to center all atoms. If you want to center them based on their mass, set masspower as True,
+     and total mass in relative atomic mass is required, also, mass list is required.\n
+    coordsinp: 2 dimensional list, format like standard xyz file\n
+    masspower: bool\n
+    totmass: float\n
+    masslist: 1 dimensional float list, order should be in accord with coordsinp
+    """
+
     print('COORD| i hope you have convert coordinates to float type, if not, no one knows what will happen...')
 
     natom = np.shape(coordsinp)[0]
