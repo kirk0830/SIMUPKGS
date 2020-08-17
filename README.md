@@ -12,6 +12,7 @@ simu-pkgs is a integrated module that contains some basic functions such as:
 To run this package, you only need to open main.py and run it. Note: numpy, matplotlib package are needed, please install them in advance:\r\n
 1) pip install numpy
 2) pip install matplotlib
+3) pip install pandas
 
 There is also another way to use this package, if you have understood how this package works, you can run all subroutine of it, for instance, pp_smooth.py provides easy-to-use smmoth function to smooth any 1 or 2 dimensional graphs, so you can directy import this module in you OWN program.
 
