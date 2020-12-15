@@ -12,9 +12,15 @@ print('FreeEner| vibarational information is needed, please remember.\n'
      +'FreeEner| molecules supported: linear structure, 2 or 3 atoms.\n'
      +'FreeEner| formulation used:\n'
      +'          G = H - TS\n'
+     +'          G = E_dft + ZPE + E_trans + E_vib + E_rot + kbT - TS\n'
      +'          H = U + pV, ideal gas, pV = nRT = NkT\n'
      +'          U = E_dft + ZPE + E_trans + E_vib + E_rot\n'
-     +'          S = S_trans + S_rot + S_vib')
+     +'          S = S_trans + S_rot + S_vib\n'
+     +'The following is updated in 2020/12/15 18:10\n'
+     +'          ref.: 10.1038/s41467-018-08136-3, see Supplementary infomation.\n'
+     +'FreeEner| There is another method to calculate free energy:\n'
+     +'          (1) obtain enthalpy H from this script\n'
+     +'          (2) use entropy data deposited on https://janaf.nist.gov/')
 
 R = 8.314
 N_A = 6.02E23
@@ -111,8 +117,21 @@ q_trans = ((2*math.pi*massAll_kg*kb*temp)/(h**2))**1.5
 q_rot = 8*math.pi**2*kb*temp*rot_interia/h
 if masslist[0]==masslist[-1]:
      q_rot /= 2
+# add explicit expression of molecular rotation contribution to internal energy, 2020/12/15
+# formulation: freeEner_formulation.nb, mathematica formatted file.
+# ln{q_rot}=lnC-ln(beta)
+# d ln{q_rot}/d beta = -1/beta
+# U = kT^2*d(lnQ)/dT, d/dT = d/d(beta)*d(beta)/dT = -1/(kT^2)*d/d(beta)
+# U_rot = -d(lnQ)/d(beta) = kT
+E_rot = kb*temp
+
+# add explicit expression of molecular translational contribution to internal energy, 2020/12/15
+# formulation: freeEner_formulation.nb, mathematica formatted file.
+# d(lnq_t)/d(beta) = 1.5/beta
+E_trans = 1.5*kb*temp
 
 print('FreeEner| partition functions information:\n'
+     +'          [NOTE] contribution of electronic part to Q has been omitted\n'
      +'          translation q_trans (volume omitted) = '+str(q_trans)+'\n'
      +'          rotation q_rot                       = '+str(q_rot)+'\n'
      +'          vibration q_vib                      = '+str(q_vib)+'\n'
@@ -120,7 +139,7 @@ print('FreeEner| partition functions information:\n'
 
 print('FreeEner| energy calculation starts. Ideal gas assumption is used:\n'
      +'          E_trans + E_rot = 5/2NkT')
-E_rigid = 5/2*kb*temp # E_rigid = E_trans + E_rot
+E_rigid = E_trans + E_rot
 U = ener0 + ZPE + E_rigid + E_vib
 H = U + kb*temp
 
@@ -180,11 +199,17 @@ elif outunit == '3':
 print('\nFreeEner| energies information:\n'
      +'          electronic energy              = '+str(ener0)+str(outunit)
      +'          zero-point energy              = '+str(ZPE)+str(outunit)
-     +'          translation + rotation         = '+str(E_rigid)+str(outunit)
+     +'          translation contribution       = '+str(E_rigid)+str(outunit)
+     +'          rotation contribution          = '+str(E_rot)+str(outunit)
+     +'          E_rigid (E_trans + E_rot)      = '+str(E_rigid)+str(outunit)
      +'          vibrational energy             = '+str(E_vib)+str(outunit)
      +'          -------------------------------------------------------------\n'
      +'          total energy (internal energy) = '+str(U)+str(outunit)
      +'          total enthalpy                 = '+str(H)+str(outunit)
+     +'          -------------------------------------------------------------\n'
+     +'          CORRECTION terms:\n'
+     +'          E_{DFT} -> U                   = '+str(U-ener0)+str(outunit)
+     +'          E_{DFT} -> H                   = '+str(H-ener0)+str(outunit) 
      )
 
 print('FreeEner| entropies information:\n'
