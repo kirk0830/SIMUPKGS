@@ -1,9 +1,10 @@
 import math
 
-print('FreeEner| absorption / desorption free energy calculated by RRKM theory is activated.')
+print('FreeEner| absorption / desorption free energy calculated under low pressure approximation is activated.\n'
+      '          reference: Statistical mechanics——for theoretical chemistry (Chinese version), Chen Minbo, Science Press.')
 print('FreeEner| formulation:\n'
-     +'          K = kb*T/h * q_prod/q_reac * exp(-Delta(E+ZPE)/kb/T)\n'
-     +'          G = -kbTlnK')
+     +'          K = q_prod/q_reac * exp(-Delta(E+ZPE)/kb/T)\n'
+     +'          G = -kbTlnK = Delta(E+ZPE)-kbTln(q_prod/q_reac)')
 R = 8.314
 N_A = 6.02E23
 kb = R/N_A
@@ -114,8 +115,8 @@ print('FreeEner| partition functions information:\n'
      +'          overall Q = q_trans*q_rot*q_vib      = '+str(Q)+'\n')
 
 deltaE = enerfin - enerini - enermole
-deltaU = deltaE - ZPE
-K = kb*temp/h*math.exp(-deltaU/kb/temp)*1/Q
+deltaU = deltaE + ZPE
+K = math.exp(-deltaU/kb/temp)*1/Q
 G = -kb*temp*math.log(K)
 
 if outunit == '2':
