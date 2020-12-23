@@ -1,0 +1,401 @@
+$$
+given\ \sin gle-electron\ spin-wavefunction\ as\ \chi _i\left( i \right) ,\ means
+$$
+$$
+its\ spin-coordinate\ is\ shorted\ as\ i\ and\ it\ in\ \chi _i\ state.
+$$
+$$
+For\ multi-electron\ spin-wavefunction,\ in\ Hartree-Fock\ frame,\ Slater\ \det\text{\ }is\ used:
+$$
+$$
+\varPsi =\frac{1}{\sqrt{N!}}\left| \begin{matrix}
+	\chi _1\left( 1 \right)&		\chi _1\left( 2 \right)&		\cdots&		\chi _1\left( N \right)\\
+	\chi _2\left( 1 \right)&		\chi _2\left( 2 \right)&		\cdots&		\chi _2\left( N \right)\\
+	\vdots&		\vdots&		\ddots&		\vdots\\
+	\chi _N\left( 1 \right)&		\chi _N\left( 2 \right)&		\cdots&		\chi _N\left( N \right)\\
+\end{matrix} \right|
+$$
+$$
+exact\ Hamiltonian:\ \hat{H}=\sum_{i=1}^N{-\frac{1}{2}\nabla _{i}^{2}-V_i}+\sum_{i<j}^N{\frac{1}{r_{ij}}}=\sum_{i=1}^N{h\left( i \right)}+\sum_{i<j}^N{\frac{1}{r_{ij}}}
+$$
+$$
+<\varPsi |\hat{H}|\varPsi >=\frac{1}{N!}<\left| \begin{matrix}
+	\chi _1\left( 1 \right)&		\chi _1\left( 2 \right)&		\cdots&		\chi _1\left( N \right)\\
+	\chi _2\left( 1 \right)&		\chi _2\left( 2 \right)&		\cdots&		\chi _2\left( N \right)\\
+	\vdots&		\vdots&		\ddots&		\vdots\\
+	\chi _N\left( 1 \right)&		\chi _N\left( 2 \right)&		\cdots&		\chi _N\left( N \right)\\
+\end{matrix} \right||\sum_{i=1}^N{h\left( i \right)}+\sum_{i<j}^N{\frac{1}{r_{ij}}}|\left| \begin{matrix}
+	\chi _1\left( 1 \right)&		\chi _1\left( 2 \right)&		\cdots&		\chi _1\left( N \right)\\
+	\chi _2\left( 1 \right)&		\chi _2\left( 2 \right)&		\cdots&		\chi _2\left( N \right)\\
+	\vdots&		\vdots&		\ddots&		\vdots\\
+	\chi _N\left( 1 \right)&		\chi _N\left( 2 \right)&		\cdots&		\chi _N\left( N \right)\\
+\end{matrix} \right|>
+$$
+$$
+=\frac{1}{N!}\sum_{i=1}^N{\sum_{permutation}^{N!}{<\left[ \left( -1 \right) ^p\hat{P}\chi _1\left( 1 \right) \chi _2\left( 2 \right) \cdots \chi _N\left( N \right) \right] |h\left( i \right) |\left[ \left( -1 \right) ^p\hat{P}\chi _1\left( 1 \right) \chi _2\left( 2 \right) \cdots \chi _N\left( N \right) \right] >}}
+$$
+$$
++\frac{1}{N!}\sum_{i<j}^N{\sum_{permutation}^{N!}{<\left[ \left( -1 \right) ^p\hat{P}\chi _1\left( 1 \right) \chi _2\left( 2 \right) \cdots \chi _N\left( N \right) \right] |\frac{1}{r_{ij}}|\left[ \left( -1 \right) ^p\hat{P}\chi _1\left( 1 \right) \chi _2\left( 2 \right) \cdots \chi _N\left( N \right) \right] >}}
+$$
+$$
+=\frac{1}{N!}\sum_{permutation}^{N!}{<\left[ \left( -1 \right) ^p\hat{P}\chi _1\left( 1 \right) \chi _2\left( 2 \right) \cdots \chi _N\left( N \right) \right] |\sum_{i=1}^N{h\left( i \right)}|\left[ \left( -1 \right) ^p\hat{P}\chi _1\left( 1 \right) \chi _2\left( 2 \right) \cdots \chi _N\left( N \right) \right] >}
+$$
+$$
++\cdots 
+$$
+$$
+=\frac{1}{N!}\left[ \left( N-1 \right) !<\chi _1\left( 1 \right) |h\left( 1 \right) |\chi _1\left( 1 \right) ><\cdots |\cdots > \right. 
+$$
+$$
++\left( N-1 \right) !<\chi _2\left( 1 \right) |h\left( 1 \right) |\chi _2\left( 1 \right) ><\cdots |\cdots >+\cdots 
+$$
+$$
++\left( N-1 \right) !<\chi _1\left( 2 \right) |h\left( 2 \right) |\chi _1\left( 2 \right) ><\cdots |\cdots >
+$$
+$$
++\left( N-1 \right) !<\chi _2\left( 2 \right) |h\left( 2 \right) |\chi _2\left( 2 \right) ><\cdots |\cdots >+\cdots 
+$$
+$$
+\left. +\cdots \right] 
+$$
+$$
++\cdots \left( ij\ terms \right) 
+$$
+$$
+=\frac{1}{N!}\left\{ \sum_{i=1}^N{\left( N-1 \right) !\left[ <\chi _1\left( i \right) |h\left( i \right) |\chi _1\left( i \right) ><\cdots |\cdots >+<\chi _2\left( i \right) |h\left( i \right) |\chi _2\left( i \right) ><\cdots |\cdots >+\cdots \right]}+\cdots \left( ij\ terms \right) \right\} 
+$$
+$$
+=\sum_{i=1}^N{t_i}+\frac{1}{N!}\sum_{i<j}^N{\sum_{permutation}^{N!}{<\left[ \left( -1 \right) ^p\hat{P}\chi _1\left( 1 \right) \chi _2\left( 2 \right) \cdots \chi _N\left( N \right) \right] |\frac{1}{r_{ij}}|\left[ \left( -1 \right) ^p\hat{P}\chi _1\left( 1 \right) \chi _2\left( 2 \right) \cdots \chi _N\left( N \right) \right] >}}
+$$
+$$
+where\ t_i=<\chi _i|h|\chi _i>,\ coordinate\ is\ not\ impor\tan t.
+$$
+$$
+ij\ terms:
+$$
+$$
+\frac{1}{N!}\sum_{i<j}^N{\sum_{permutation}^{N!}{<\left[ \left( -1 \right) ^p\hat{P}\chi _1\left( 1 \right) \chi _2\left( 2 \right) \cdots \chi _N\left( N \right) \right] |\frac{1}{r_{ij}}|\left[ \left( -1 \right) ^p\hat{P}\chi _1\left( 1 \right) \chi _2\left( 2 \right) \cdots \chi _N\left( N \right) \right] >}}
+$$
+$$
+=\frac{1}{N!}\sum_{i<j}^N{\left[ <\chi _1\left( 1 \right) \chi _2\left( 2 \right) |\frac{1}{r_{12}}|\chi _1\left( 1 \right) \chi _2\left( 2 \right) ><\cdots |\cdots >+<\chi _1\left( 2 \right) \chi _2\left( 1 \right) |\frac{1}{r_{12}}|\chi _1\left( 2 \right) \chi _2\left( 1 \right) ><\cdots |\cdots > \right.}
+$$
+$$
+-<\chi _1\left( 1 \right) \chi _2\left( 2 \right) |\frac{1}{r_{12}}|\chi _1\left( 2 \right) \chi _2\left( 1 \right) ><\cdots |\cdots >-<\chi _1\left( 2 \right) \chi _2\left( 1 \right) |\frac{1}{r_{12}}|\chi _1\left( 1 \right) \chi _2\left( 2 \right) ><\cdots |\cdots >
+$$
+$$
+\left. +<|\frac{1}{r_{13}}|><\cdots |\cdots >+\cdots \right] 
+$$
+$$
+remember\ \frac{1}{r_{12}}=\frac{1}{|r_1-r_2|}=\frac{1}{r_{21}}=\frac{1}{|r_2-r_1|}
+$$
+$$
+<\chi _1\left( 2 \right) \chi _2\left( 1 \right) |\frac{1}{r_{12}}|\chi _1\left( 2 \right) \chi _2\left( 1 \right) >,\ exchange\ 1\leftrightarrow 2:\ <\chi _1\left( 1 \right) \chi _2\left( 2 \right) |\frac{1}{r_{21}}|\chi _1\left( 1 \right) \chi _2\left( 2 \right) >
+$$
+$$
+it\ wont\ affect\ value\ of\ integral:\ <\chi _1\left( 2 \right) \chi _2\left( 1 \right) |\frac{1}{r_{12}}|\chi _1\left( 2 \right) \chi _2\left( 1 \right) >=<\chi _1\left( 1 \right) \chi _2\left( 2 \right) |\frac{1}{r_{21}}|\chi _1\left( 1 \right) \chi _2\left( 2 \right) >
+$$
+$$
+similarily:\ <\chi _1\left( 1 \right) \chi _2\left( 2 \right) |\frac{1}{r_{12}}|\chi _1\left( 2 \right) \chi _2\left( 1 \right) >=<\chi _1\left( 2 \right) \chi _2\left( 1 \right) |\frac{1}{r_{21}}|\chi _1\left( 1 \right) \chi _2\left( 2 \right) >
+$$
+$$
+for\ electron-electron\ interaction\ pair\ \left( \chi _1,\ \chi _2 \right) ,\ coordinate\ pair\ choice:\ C_{N}^{2}=\frac{N!}{\left( N-2 \right) !2!}
+$$
+$$
+permutation\ gives\ more\ multiplicity:\ A_{N-2}^{N-2}=\left( N-2 \right) !
+$$
+$$
+therefore,\ ij\ term\ equals\ to:
+$$
+$$
+\frac{1}{N!}\sum_{i<j}^N{C_{N}^{2}A_{N-2}^{N-2}2\left[ <\chi _1\left( 1 \right) \chi _2\left( 2 \right) |\frac{1}{r_{12}}|\chi _1\left( 1 \right) \chi _2\left( 2 \right) >-<\chi _1\left( 1 \right) \chi _2\left( 2 \right) |\frac{1}{r_{12}}|\chi _1\left( 2 \right) \chi _2\left( 1 \right) > \right]}
+$$
+$$
+=\sum_{i<j}^{N,\ N}{\left[ <\chi _i\left( i \right) \chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( i \right) \chi _j\left( j \right) >-<\chi _i\left( i \right) \chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( j \right) \chi _j\left( i \right) > \right]}
+$$
+$$
+=\sum_{i<j}^{N,\ N}{\left( J_{ij}-K_{ij} \right)}
+$$
+$$
+therefore,\ <\varPsi |\hat{H}|\varPsi >=\sum_{i=1}^N{t_i}+\sum_{i<j}^{N,\ N}{\left( J_{ij}-K_{ij} \right)}
+$$
+$$
+review\ that\ \sin gle-electron\ spin-wavefunctions\ are\ orthonormal:
+$$
+$$
+<\chi _i|\chi _j>=\delta _{ij},\ use\ as\ constraint\ in\ Lagrangian\ method:
+$$
+$$
+L=<\varPsi |\hat{H}|\varPsi >-\sum_{i,j\ =\ 1}^{N,\ N}{\varepsilon _{ij}\left( <\chi _i|\chi _j>-\delta _{ij} \right)}
+$$
+$$
+variational\ requires:\ \delta L=0
+$$
+$$
+thus\ \delta \left( <\varPsi |\hat{H}|\varPsi > \right) -\delta \left[ \sum_{i,j\ =\ 1}^{N,\ N}{\varepsilon _{ij}\left( <\chi _i|\chi _j>-\delta _{ij} \right)} \right] =0
+$$
+$$
+\delta \left( <\varPsi |\hat{H}|\varPsi > \right) =\delta \left[ \sum_{i=1}^N{t_i}+\sum_{i<j}^{N,\ N}{\left( J_{ij}-K_{ij} \right)} \right] 
+$$
+$$
+=\sum_{i=1}^N{\delta t_i}+\sum_{i<j}^{N,\ N}{\delta \left( J_{ij}-K_{ij} \right)}
+$$
+$$
+\delta t_i=\delta <\chi _i|h|\chi _i>=<\delta \chi _i|h|\chi _i>+<\chi _i|h|\delta \chi _i>
+$$
+$$
+Hermite\ matrix\ h,\ so,
+$$
+$$
+\delta t_i=2<\delta \chi _i|h|\chi _i>.
+$$
+$$
+Meanwhile,\ \delta \left( J_{ij}-K_{ij} \right) =\delta J_{ij}-\delta K_{ij}
+$$
+$$
+\delta J_{ij}=\delta <\chi _i\left( i \right) \chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( i \right) \chi _j\left( j \right) >
+$$
+$$
+=<\delta \chi _i\left( i \right) \chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( i \right) \chi _j\left( j \right) >+<\chi _i\left( i \right) \delta \chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( i \right) \chi _j\left( j \right) >
+$$
+$$
++<\chi _i\left( i \right) \chi _j\left( j \right) |\frac{1}{r_{ij}}|\delta \chi _i\left( i \right) \chi _j\left( j \right) >+<\chi _i\left( i \right) \chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( i \right) \delta \chi _j\left( j \right) >
+$$
+$$
+=2<\delta \chi _i\left( i \right) \chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( i \right) \chi _j\left( j \right) >+2<\chi _i\left( i \right) \delta \chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( i \right) \chi _j\left( j \right) >
+$$
+$$
+\delta K_{ij}=\delta <\chi _i\left( i \right) \chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( j \right) \chi _j\left( i \right) >
+$$
+$$
+=<\delta \chi _i\left( i \right) \chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( j \right) \chi _j\left( i \right) >+<\chi _i\left( i \right) \delta \chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( j \right) \chi _j\left( i \right) >
+$$
+$$
++<\chi _i\left( i \right) \chi _j\left( j \right) |\frac{1}{r_{ij}}|\delta \chi _i\left( j \right) \chi _j\left( i \right) >+<\chi _i\left( i \right) \chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( j \right) \delta \chi _j\left( i \right) >
+$$
+$$
+exchange\ coordinates\ 1\leftrightarrow 2\ in\ last\ two\ terms,\ also\ use\ symmetry\ of\ Hermite\ matrix:
+$$
+$$
+<\chi _i\left( i \right) \chi _j\left( j \right) |\frac{1}{r_{ij}}|\delta \chi _i\left( j \right) \chi _j\left( i \right) >=<\chi _i\left( j \right) \chi _j\left( i \right) |\frac{1}{r_{ji}}|\delta \chi _i\left( i \right) \chi _j\left( j \right) >
+$$
+$$
+<\chi _i\left( i \right) \chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( j \right) \delta \chi _j\left( i \right) >=<\chi _i\left( j \right) \chi _j\left( i \right) |\frac{1}{r_{ji}}|\chi _i\left( i \right) \delta \chi _j\left( j \right) >
+$$
+$$
+\delta K_{ij}=2<\delta \chi _i\left( i \right) \chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( j \right) \chi _j\left( i \right) >+2<\chi _i\left( i \right) \delta \chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( j \right) \chi _j\left( i \right) >
+$$
+$$
+\delta \left( <\varPsi |\hat{H}|\varPsi > \right) =\sum_{i=1}^N{\delta t_i}+\sum_{i<j}^{N,\ N}{\delta \left( J_{ij}-K_{ij} \right)}
+$$
+$$
+=2\sum_{i=1}^N{<\delta \chi _i|h|\chi _i>}+2\sum_{i<j}^{N,\ N}{<\delta \chi _i\left( i \right) \chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( i \right) \chi _j\left( j \right) >+<\chi _i\left( i \right) \delta \chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( i \right) \chi _j\left( j \right) >}
+$$
+$$
+-\left[ <\delta \chi _i\left( i \right) \chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( j \right) \chi _j\left( i \right) >+<\chi _i\left( i \right) \delta \chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( j \right) \chi _j\left( i \right) > \right] 
+$$
+$$
+extract\ all\ \delta \chi _i\left( i \right) -relevant\ terms:
+$$
+$$
+2\left\{ h|\chi _i>+\sum_{j=1,\ j\ne i}^N{<\chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( i \right) \chi _j\left( j \right) >-<\chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( j \right) \chi _j\left( i \right) >} \right\} 
+$$
+$$
+back\ to\ constraint\ conditions...:\ \delta \sum_{i,j\ =\ 1}^{N,\ N}{\varepsilon _{ij}\left( <\chi _i|\chi _j>-\delta _{ij} \right)}
+$$
+$$
+\sum_{i,j\ =\ 1}^{N,\ N}{\varepsilon _{ij}\left( <\chi _i|\chi _j>-\delta _{ij} \right)}=\sum_{i,j\ =\ 1}^{N,\ N}{\varepsilon _{ij}\left( <\delta \chi _i|\chi _j>+<\chi _i|\delta \chi _j> \right)}
+$$
+$$
+therefore:\ 2\left\{ h|\chi _i>+\sum_{j=1,\ j\ne i}^N{<\chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( i \right) \chi _j\left( j \right) >-<\chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( j \right) \chi _j\left( i \right) >} \right\} -\sum_{i,j\ =\ 1}^{N,\ N}{\varepsilon _{ij}\left( <\delta \chi _i|\chi _j>+<\chi _i|\delta \chi _j> \right)}=0
+$$
+$$
+h\left( i \right) |\chi _i>+\sum_{j=1,\ j\ne i}^N{\left[ <\chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( i \right) \chi _j\left( j \right) >-<\chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( j \right) \chi _j\left( i \right) > \right]}=\sum_{j=1}^N{\varepsilon _{ij}|\chi _j>}
+$$
+$$
+define\ \hat{f}\left( i \right) |\chi _i>=\sum_{j=1}^N{\varepsilon _{ij}|\chi _j>},\ as\ original\ Hartree-Fock\ equation
+$$
+$$
+\hat{F}\left( 1,2,\cdots ,N \right) =\sum_{i=1}^N{\hat{f}\left( i \right)},
+$$
+$$
+W=|\chi _1>\otimes |\chi _2>\otimes \cdots 
+$$
+$$
+\hat{F}W=\varSigma W
+$$
+$$
+Note\ that\ Fock\ operator\ is\ unitary\ invaraint...UU^{\dag}=1
+$$
+$$
+U^{\dag}\hat{F}W=U^{\dag}\varSigma W
+$$
+$$
+\left( U^{\dag}\hat{F}U \right) \left( U^{\dag}W \right) =\left( U^{\dag}\varSigma U \right) \left( U^{\dag}W \right) 
+$$
+$$
+\text{diag}onalize\ \varSigma \ to\ E,
+$$
+$$
+\hat{F}'W'=EW'
+$$
+$$
+canonical\ Hartree-Fock\ equation\ obtained:\ \hat{f}'\left( i \right) |\chi _i'>=\varepsilon _{ii}'|\chi _i'>
+$$
+$$
+drop\ primes\ and\ make\ \varepsilon _{ii}=\varepsilon _i,\ finally\ obtained\ commonly\ seen\ Hartree-Fock\ equation:
+$$
+$$
+\hat{f}\left( i \right) |\chi _i>=\varepsilon _i|\chi _i>
+$$
+$$
+Note\ that\ this\ equation\ means,\ by\ anti-symmetrically\ combining\ \sin gle-electron\ spin-wavefunctions,
+$$
+$$
+where\ in\ reality\ none\ of\ exact\ forms\ is\ known,\ based\ on\ variational\ method,
+$$
+$$
+we\ find\ each\ \sin gle-electron\ spin-wavefunction\ should\ obey\ Hartree-Fock\ equation.
+$$
+$$
+Also\ we\ note\ that\ from\ differential\ equation,\ infinite\ numbers\ of\ solution\ can\ be\ found.
+$$
+$$
+However,\ it\ is,\ still\ hard\ to\ directly\ find\ solutions\ of\ HF\ eq.,
+$$
+$$
+always\ a\ set\ of\ known\ basis\ is\ used\ to\ \exp and\ unknown\ wavefunction.
+$$
+$$
+The\ task\ to\ know\ exact\ \exp ression\ of\ wavefunction\ is\ then\ converted\ into\ 
+$$
+$$
+to\ know\ combination\ coefficients\ of\ known\ basis.
+$$
+$$
+This\ method\ convert\ differential\ equation\ to\ pure\ a\lg ebra\ equation.
+$$
+$$
+Thus\ let\ |\chi _i>=\sum_{\mu}{c_{i\mu}\psi _{\mu}},\ \left( canonical \right) \ HF\ eq.\ becomes:
+$$
+$$
+\hat{f}\left( i \right) \sum_{\mu}{c_{i\mu}\psi _{\mu}}=\varepsilon _i\sum_{\mu}{c_{i\mu}\psi _{\mu}}
+$$
+$$
+\psi _{\nu}^{*}\hat{f}\left( i \right) \sum_{\mu}{c_{i\mu}\psi _{\mu}}=\psi _{\nu}^{*}\varepsilon _{ii}\sum_{\mu}{c_{i\mu}\psi _{\mu}}
+$$
+$$
+\sum_{\mu}{c_{i\mu}\psi _{\nu}^{*}\hat{f}\left( i \right) \psi _{\mu}}=\varepsilon _{ii}\sum_{\mu}{c_{i\mu}\psi _{\nu}^{*}\psi _{\mu}}
+$$
+$$
+\sum_{\mu}{c_{i\mu}<\nu |\hat{f}\left( i \right) |\mu >}=\varepsilon _{ii}\sum_{\mu}{c_{i\mu}<\nu |\mu >}
+$$
+$$
+F_{\nu \mu}\equiv <\nu |\hat{f}\left( i \right) |\mu >,\ S_{\nu \mu}\equiv <\nu |\mu >
+$$
+$$
+\sum_{\mu}{c_{i\mu}F_{\nu \mu}}=\varepsilon _{ii}\sum_{\mu}{c_{i\mu}S_{\nu \mu}}
+$$
+$$
+\mathbf{FC}=\mathbf{\varepsilon SC\ }\left( Hartree-Fock-Roothaan\ eq. \right) 
+$$
+$$
+F_{\nu \mu}\equiv <\nu |\hat{f}\left( i \right) |\mu >
+$$
+$$
+\hat{f}\left( i \right) =h\left( i \right) +\sum_{j=1,\ j\ne i}^N{\left[ <\chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _j\left( j \right) >-<\chi _j\left( j \right) |\frac{1}{r_{ij}}|\chi _i\left( j \right) \chi _j\left( i \right) > \right]}
+$$
+$$
+F_{\nu \mu}=<\nu |h\left( i \right) |\mu >+\sum_{j=1,\ j\ne i}^N{\left[ <\nu \left( i \right) \chi _j\left( j \right) |\frac{1}{r_{ij}}|\mu \left( i \right) \chi _j\left( j \right) >-<\nu \left( i \right) \chi _j\left( j \right) |\frac{1}{r_{ij}}|\mu \left( j \right) \chi _j\left( i \right) > \right]}
+$$
+$$
+=<\nu |h\left( i \right) |\mu >+\sum_{j=1,\ j\ne i}^N{\left[ <\nu \left( i \right) \sum_{\sigma}{c_{j\sigma}^{\dag}\sigma ^{\dag}\left( j \right)}|\frac{1}{r_{ij}}|\mu \left( i \right) \sum_{\sigma}{c_{j\lambda}\lambda \left( j \right)}>-<\nu \left( i \right) \sum_{\sigma}{c_{j\sigma}^{\dag}\sigma ^{\dag}\left( j \right)}|\frac{1}{r_{ij}}|\mu \left( j \right) \sum_{\sigma}{c_{j\lambda}\lambda \left( i \right)}> \right]}
+$$
+$$
+=H_{core,\ \nu \mu}+\sum_{j=1,\ j\ne i}^N{\sum_{\sigma}{\sum_{\lambda}{c_{j\sigma}^{\dag}c_{j\lambda}\left[ <\nu \sigma |\frac{1}{r_{ij}}|\mu \lambda >-<\nu \sigma |\frac{1}{r_{ij}}|\lambda \mu > \right]}}}
+$$
+$$
+=H_{core,\ \nu \mu}+\sum_{j=1,\ j\ne i}^N{\sum_{\sigma}{\sum_{\lambda}{c_{j\sigma}^{\dag}c_{j\lambda}\left[ <\nu \sigma |\mu \lambda >-<\nu \sigma |\lambda \mu > \right]}}}
+$$
+$$
+adsorb\ \frac{1}{r_{ij}}\ in\ <\nu \sigma |\mu \lambda >\ basis\ intergration\ as\ their\ internal\ property,
+$$
+$$
+define\ \sum_{j=1,\ j\ne i}^N{c_{j\sigma}^{\dag}c_{j\lambda}}\ as\ P_{\sigma \lambda},\ note\ that\ matrix\ c_{j\sigma}^{\dag}\ and\ c_{j\lambda}\ may\ be\ not\ squared-shape\ matrix,
+$$
+$$
+but\ P_{\sigma \lambda}\ must\ be\ a\ square-shaped\ matrix.
+$$
+$$
+=H_{core,\ \nu \mu}+\sum_{\sigma}{\sum_{\lambda}{P_{\sigma \lambda}\left[ <\nu \sigma |\mu \lambda >-<\nu \sigma |\lambda \mu > \right]}}
+$$
+$$
+Therefore,\ F_{\nu \mu}=H_{core,\ \nu \mu}+\sum_{\sigma}{\sum_{\lambda}{P_{\sigma \lambda}\left[ <\nu \sigma |\mu \lambda >-<\nu \sigma |\lambda \mu > \right]}}
+$$
+$$
+in\ actual\ calculation,\ basis\ functions\ locate\ where\ their\ center\ coincide\ with\ atomic\ coordinates\ \left\{ \boldsymbol{R}_i \right\} 
+$$
+$$
+Therefore\ four-electron\ integrations\ must\ be\ calculated\ at\ each\ geometry\ step.\ But\ for\ static\ calculation,
+$$
+$$
+they\ are\ only\ calculated\ for\ once.
+$$
+$$
+recall\ H.-F.-R.\ eq.:\ \mathbf{FC}=\mathbf{\varepsilon SC,\ \varepsilon \ }is\ \text{diag}noal\ but\ \mathbf{S\ }is\ not.
+$$
+$$
+There\ is\ one\ way\ to\ obtain\ C\ matrix\ that\ \text{diag}onalize\ \mathbf{F\ }and\ reduce\ \mathbf{S\ }to\ \mathbf{I}
+$$
+$$
+find\ \mathbf{C}=\mathbf{XC'\ }and
+$$
+$$
+\mathbf{X}^{\dag}\mathbf{FXC'}=\mathbf{\varepsilon X}^{\dag}\mathbf{SXC'}
+$$
+$$
+\left( \mathbf{X}^{\dag}\mathbf{FX} \right) \mathbf{C'}=\mathbf{\varepsilon C',}
+$$
+$$
+\mathbf{F'C'}=\mathbf{\varepsilon C'}
+$$
+$$
+\mathbf{U}^{\dag}\mathbf{SU}=\mathbf{s\ }\left( \text{diag}onalization \right) 
+$$
+$$
+\mathbf{X}^{\dag}\mathbf{SX}=\mathbf{I}
+$$
+$$
+\mathbf{s}^{-1/2}\mathbf{U}^{\dag}\mathbf{SUs}^{-1/2}=\mathbf{I}
+$$
+$$
+\mathbf{X}=\mathbf{Us}^{-1/2}=\left( \begin{matrix}
+	U_{11}/s_{1}^{1/2}&		U_{12}/s_{2}^{1/2}&		\cdots&		U_{1N}/s_{N}^{1/2}\\
+	U_{21}/s_{1}^{1/2}&		U_{22}/s_{2}^{1/2}&		\cdots&		U_{2N}/s_{N}^{1/2}\\
+	\vdots&		\vdots&		\ddots&		\vdots\\
+	U_{N1}/s_{1}^{1/2}&		U_{N2}/s_{2}^{1/2}&		\cdots&		U_{NN}/s_{N}^{1/2}\\
+\end{matrix} \right) 
+$$
+$$
+\mathbf{X\ }can\ be\ rearranged\ and\ truncated\ \sin gular\ values,\ 
+$$
+$$
+\mathbf{C'\ }then\ is\ obtained\ be\ \text{diag}onalizing\ \mathbf{F',\ }then\ form\ new\ \mathbf{P}
+$$
+$$
+SCF:
+$$
+$$
+1,\ select\ basis\ and\ calculate\ all\ terms\ in\ \mathbf{F,\ }use\ \mathbf{P}=0\ as\ initial\ guess.
+$$
+$$
+2.\ calculate\ \mathbf{S\ }and\ \left( \mathbf{s,\ U} \right) ,\ then\ \mathbf{X,\ F',\ }obtain\ new\ \mathbf{C'\ }to\ form\ \mathbf{P}
+$$
+$$
+3.\ calculate\ new\ \mathbf{F\ }and\ \mathbf{F',\ }obtain\ new\ \mathbf{C'\ }to\ form\ \mathbf{P}
+$$
+$$
+4.\ calculate\ new\ \mathbf{F\ }and\ \mathbf{F',\ }obtain\ new\ \mathbf{C'\ }to\ form\ \mathbf{P}
+$$
+$$
+5.\ \cdots 
+$$
