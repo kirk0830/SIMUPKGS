@@ -2,16 +2,16 @@
 Welcome to SIMUPKGS
 ---------------------
 
-UPDATE at 2020/12/24:  
+[UPDATE] at 2020/12/24:  
 A basic framework of Hartree-Fock method is added into directory. Modules support function-integration, more specificly, one-electron integrator, two-, three and four will be coded and upload. For I am busy recently so this will be a long process.  
 Also there seem some module that I just code them in several month ago but failed to upload them.  
   
-UPDATE at 2020/12:  
+[UPDATE] at 2020/12:  
 Two cp2k scripts are uploaded, alter.sh and grep.sh, for performing cutoff convergence tests on supercomputer where batch subscribing is not allowed or, not a good choice.
 To use alter.sh, you need to delete all space in front of parameters CUTOFF, REL_CUTOFF, R_CUTOFF and KPOINTS. An input script named cutofftest.inp should be placed in the same directory in advance or, you can modify these two shell whatever you want.  
 These two auxillary shell will not be incorperated into main.py of SIMUPKGS.  
   
-UPDATE at 2020/6:  
+[UPDATE] at 2020/6:  
 SIMUPKGS is a integrated module that contains some basic functions such as:  
 1) supercell duplication  
 2) free energy calculation of isolated molecule (based on frequencies result yiedled by other software, but I will add frequency calculation into my package in the future)  
