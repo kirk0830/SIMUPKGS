@@ -1,3 +1,11 @@
+2020/12/24 add note:
+basis functions when calculate matrix element of Fock operator, these basis functions, always means atomic wavefunction, but not Gaussian and other pure-mathematical functions.
+More detailed introduction, see Sazbo's Modern Quantum Chemistry, where He discusses detailed calculation of H2 molecule. Although STO-3G is employed to expand atom wavefunctions, all matrices are still 2-row-2-column, because ONLY 2 HYDROGEN ATOMIC WAVEFUNCTIONs are chosen as basis to expand solution to (canonical) Hartree-Fock equation.
+Thus we come back to the past that we "guess" molecular wavefunction can be in the form of linear combination of atomic wavefunctions.
+
+And C matrix we finally obtained, is the matrix contains N (number of atoms) lowest groups of coefficent that can be used to express ONE CERTAIN canonical spin-wavefunction of molecule that we are of interest.
+
+Also remember to have a full-wavefunction, we need to combine all spin-orbitals in Slater determinant form. OR WE ONLY HAVE SEVERAL SINGLE-ELECTRON WAVEFUNCTION in molecular field.
 $$
 given single-electron spin-wavefunction\ as\ \chi _i\left( i \right) ,\ means
 $$
