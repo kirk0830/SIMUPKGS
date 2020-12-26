@@ -1,4 +1,5 @@
-from diag_numpy import npDiag as diag
+#from diag_numpy import npDiag as diag
+from diag_so2 import diag as diag
 import numpy as np
 import _in_matrix_op as mop
 def Gij(denMat, Vee, mode = 'restricted'):
@@ -88,7 +89,15 @@ def hf_fp(Tij, natom, VneList, Gij, printH = True):
 
 # this function gives new coefficient matrix and density matrix
 
-def hf_bp(Fij, Sij, printP = True, restricted = True, singular_exclu = False, eigValThre = 1E-5):
+def hf_bp(
+    Fij, 
+    Sij, 
+    printP = True, 
+    restricted = True, 
+    singular_exclu = False, 
+    eigValThre = 1E-5, 
+    verbosity = 'debug'
+    ):
 
     """
     Hartree-Fock backward propagation function\n
@@ -103,18 +112,26 @@ def hf_bp(Fij, Sij, printP = True, restricted = True, singular_exclu = False, ei
     singluar_exclu: excludes extremely small eigenvalues of Sij by truncating, not implemented yet\n
     eigValThre: threshold for truncating diagonalized Sij, not implemented yet\n
     """
-    [s, U] = diag(mat = Sij, sortFlag = singular_exclu)
+    [s, U] = diag(mat = Sij)
     sqrtInvDiagS = np.zeros_like(s)
     for i in range(np.shape(s)[0]):
 
         sqrtInvDiagS[i][i] = 1/np.sqrt(s[i][i])
 
     X = np.matmul(U, sqrtInvDiagS)
-    invX = np.linalg.inv(X)
-    Fij_prime = np.matmul(invX, Fij)
+
+    Fij_prime = np.matmul(np.transpose(X), Fij)
     Fij_prime = np.matmul(Fij_prime, X)
+
     [e_prime, C_prime] = diag(mat = Fij_prime)
     C = np.matmul(X, C_prime)
+    if verbosity == 'debug':
+        print('SIMUPKGS_DEBUG_MODE | Uij = '+str(U))
+        print('SIMUPKGS_DEBUG_MODE | s^{-1/2}ij = '+str(sqrtInvDiagS))
+        print('SIMUPKGS_DEBUG_MODE | Xij = '+str(X))
+        print('SIMUPKGS_DEBUG_MODE | Fij\' = '+str(Fij_prime))
+        print('SIMUPKGS_DEBUG_MODE | Cij\' = '+str(C_prime))
+        print('SIMUPKGS_DEBUG_MODE | Cij = '+str(C))
 
     if printP:
         if restricted:
