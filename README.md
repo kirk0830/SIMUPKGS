@@ -1,6 +1,15 @@
 ---------------------
 Welcome to SIMUPKGS
 ---------------------
+[UPDATE] at 2020/12/26:
+A basic Hartree-fock program that transcode from FORTRAN code written by Szabo is uploaded, for further generalization, I divide whole program into several subroutines:  
+A_Szabo_RHF_HeH.py: main program that contains initialization of integrals, and SCF procedure  
+hf_propagation.py: subroutine that has been partially generalized can be used to solve other HF equations  
+diag_numpy.py: subroutine that has been fully generalized can be used to perform diagonalization and rearrange transforming matrix and matrix diagonalized  
+basisReadIn.py: subroutine that read external basis-contained files, format required is shown in basis.dat file  
+GauInteLib.py: subroutine that can calculate s-orbital integrals, has not bebn generalized yet  
+  
+several simple optimizers will come soon.  
 
 [UPDATE] at 2020/12/24:  
 A basic framework of Hartree-Fock method is added into directory. Modules support function-integration, more specificly, one-electron integrator, two-, three and four will be coded and upload. For I am busy recently so this will be a long process.  
