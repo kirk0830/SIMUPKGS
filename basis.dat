@@ -1,0 +1,18 @@
+# Basis data storage
+# format:
+# Line 1: basis name, human readable
+# Line 2-: linar combination coefficent, exponential coefficent, 
+#          powers of x, y and z direction, for high angular momentum orbitals.
+#          For instance, (0, 0, 0): s-orbital, (1, 0, 0): px-orbital,
+#                        (1, 1, 0): dxy-orbital
+
+$STO-1G
+1 0.27095 0 0 0
+$STO-2G
+0.678914 0.151623 0 0 0
+0.430129 0.851819 0 0 0
+$STO-3G
+0.444635 0.109818 0 0 0
+0.535328 0.405771 0 0 0
+0.154329 2.227660 0 0 0
+$END
