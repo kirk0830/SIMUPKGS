@@ -1,18 +1,3 @@
-#import basisReadIn
-
-#print(basisReadIn.getBasis('STO-3G', verbosity= 'debug'))
-import numpy as np
-A = [[1, 0.45077041164778764], [0.45077041164778764, 1]]
-print(type(A))
-
-'''
-A = np.zeros(shape = (2, 2))
-B = np.ones_like(A)
-C = [A, B]
-print(C[1])
-print(C[1][:][:])
-
-'''
 from A_Szabo_RHF_HeH import scf as scf
 
 iop = 2
