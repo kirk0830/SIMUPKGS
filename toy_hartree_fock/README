@@ -1,1 +1,22 @@
-codes in this directory have not been fully debugged yet.
+DEBUG IS COMPLETE!!!  
+Other's code is forever unreliable...  
+Bug is caused by blindly calling numpy.linalg.eig() function to diagonalize matrix, which, however, outputs eigenvector in a strange order.  
+Anyone who find my comment can try a simple task:  
+
+import numpy as np  
+S = [[1, 0.4508], [0.4508, 1]]  
+[s, U] = np.linalg.eig(S)  
+print(s)  
+print(U)  
+temp = np.dot(np.linalg.inv(U), np.diag(s))  
+temp = np.dot(temp, U)  
+print(temp)  
+
+check what you will get, if last three lines can successfully reproduces S matrix? NO!  
+According to document of eig() function, it will provide a right vector matrix, i.e., |>|>|>|>..., However, it doesn't, instead, you can reproduce S matrix by:  
+temp = np.dot(U, np.diag(s))  
+temp = np.dot(temp, np.linalg.inv(U))  
+
+lol
+
+2020/12/27
