@@ -1,4 +1,4 @@
-*** SEVRE WARNING ***
+*** SEVERE WARNING ***  
 codes in this directory are not debugged yet and there are indeed some bugs!  
 Do not use codes in this directory.  
   
