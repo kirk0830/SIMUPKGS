@@ -68,8 +68,8 @@ def kinetic_matrix(basis_dict, coords):
     Tij = np.zeros(shape = (natom, natom))
     for irow in range(natom):
         for icol in range(natom):
-            for igau in range(len(basis_dict[irow])):
-                for jgau in range(len(basis_dict[icol])):
+            for igau in range(0, len(basis_dict[irow]), 5):
+                for jgau in range(0, len(basis_dict[icol]), 5):
                     alpha_A = basis_dict[irow][igau]
                     alpha_B = basis_dict[icol][jgau]
 
@@ -119,8 +119,8 @@ def Vne_matrix(basis_dict, coords, chargelist, mode = 'all'):
     for icore in range(Vne_sum_lo, vne_sum_hi):
         for irow in range(natom):
             for icol in range(natom):
-                for igau in range(len(basis_dict[irow])):
-                    for jgau in range(len(basis_dict[icol])):
+                for igau in range(0, len(basis_dict[irow]), 5):
+                    for jgau in range(0, len(basis_dict[icol]), 5):
                         alpha_A = basis_dict[irow][igau]
                         alpha_B = basis_dict[icol][jgau]
                         
@@ -161,10 +161,10 @@ def Vee_matrix(basis_dict, coords):
         for id2 in range(natom):
             for id3 in range(natom):
                 for id4 in range(natom):
-                    for igau in range(len(basis_dict[id1])):
-                        for jgau in range(len(basis_dict[id2])):
-                            for kgau in range(len(basis_dict[id3])):
-                                for lgau in range(len(basis_dict[id4])):
+                    for igau in range(0, len(basis_dict[id1]), 5):
+                        for jgau in range(0, len(basis_dict[id2]), 5):
+                            for kgau in range(0, len(basis_dict[id3]), 5):
+                                for lgau in range(0, len(basis_dict[id4]), 5):
                                     alpha_A = basis_dict[id1][igau]
                                     alpha_B = basis_dict[id2][jgau]
                                     alpha_C = basis_dict[id3][kgau]
