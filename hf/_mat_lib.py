@@ -94,3 +94,24 @@ def dot(mat_a, mat_b):
     else:
         print('ERROR! Number of columns of matrix A does not equal to number of rows of matrix B!')
         raise TypeError
+
+def pivot(mat_in, row_num, mode = 'partial'):
+
+    nline = len(mat_in)
+
+    if mode == 'partial':
+
+        temp_row = mat_in[row_num][:]
+        irow = row_num
+        while mat_in[irow][row_num] == 0:
+            irow += 1
+            if irow == nline:
+                print('***error*** partial pivoting failed due to non-zero element in present column not founded.')
+                exit()
+        mat_in[row_num][:] = mat_in[irow][:]
+        mat_in[irow][:] = temp_row
+
+        return mat_in
+    elif mode == 'full':
+
+        pass
