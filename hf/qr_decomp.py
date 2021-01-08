@@ -5,6 +5,16 @@ from copy import deepcopy
 
 def qr(mat_in, mode = 'householder', verbosity = 'silent'):
 
+    """
+    QR decomposition\n
+    A = QR, where R is upper-triangonal matrix\n
+    # input requirement\n
+    mat_in: matrix to perform QR decomposition, only squared matrix is supported\n
+    mode: 'householder' (recommended) or 'schmidt' (not recommended, bug exists, unsolved)\n
+    ***WARNING*** there is something wrong in schmidt mode, do not use it presently, and note that det of mat_in should not be zero!\n
+    # output description\n
+    [original matrix, Q matrix, R matrix]
+    """
     nline = len(mat_in)
     mat_op_on = deepcopy(mat_in)
 
@@ -36,6 +46,7 @@ def qr(mat_in, mode = 'householder', verbosity = 'silent'):
 
     elif mode == 'schmidt':
 
+        print('QR| ***warning*** There seems one bug that has not been discovered yet, although Gram-Schmidt works well.')
         [_, Q] = gs(mat_in, mode = 'column', verbosity = verbosity)
 
         Q_t = mlib.transpose(Q)
