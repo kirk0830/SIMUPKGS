@@ -115,3 +115,50 @@ def pivot(mat_in, row_num, mode = 'partial'):
     elif mode == 'full':
 
         pass
+
+from math import sqrt
+
+def mod_of_vec(vec):
+
+    mod = 0
+    for icompo in vec:
+
+        mod += icompo**2
+    return sqrt(mod)
+
+def braket(bra, ket, mode = '2ket'):
+
+    prod = 0
+    n = len(bra)
+    m = len(ket)
+
+    if n != m:
+        print('***error*** shape of |> is not consistent with <|, quit.')
+        exit()
+
+    if mode == 'braket':
+
+        pass
+    elif mode == '2bra':
+
+        pass
+    elif mode == '2ket':
+        # two 1d list
+        for i in range(n):
+            prod += bra[i]*ket[i]
+    
+    return prod
+        
+def transpose(mat_in):
+
+    size = len(mat_in)
+    mat_out = zeros(n = size)
+    for irow in range(size):
+        for icol in range(size):
+
+            mat_out[icol][irow] = mat_in[irow][icol]
+    return mat_out
+
+# things will be easier if import numpy but here I wont import it
+from _in_matrix_op import matrix_minus as minus
+from _in_matrix_op import matrix_plus as plus
