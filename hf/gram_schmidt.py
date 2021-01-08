@@ -42,7 +42,7 @@ def gs_orth(vec_set, mode = 'column', start = 0, normalize = True, verbosity = '
             _vec = [vec_set[i][icol] for i in range(len_vec)]
             vec_colle.append(_vec)
         if verbosity == 'debug':
-            print('GRAM-SCHMIDT| |i> => <i|, column vectors have been saved as <| for easy calculation:{}'.format(vec_colle))
+            print('GRAM-SCHMIDT| |i> => <i|, column vectors have been saved as <| for easy calculation:\n{}'.format(vec_colle))
     elif mode == 'row':
 
         for irow in range(nvec):
@@ -92,7 +92,8 @@ def gs_orth(vec_set, mode = 'column', start = 0, normalize = True, verbosity = '
         orth_set[i][:] = mlib.minus(vec2orth, cut)
         mod_vec[i] = mlib.mod_of_vec(orth_set[i][:]) #refresh mod info
         norm_orth_set[i][:] = [item/mod_vec[i] for item in orth_set[i][:]]
-        print('GRAM-SCHMIDT| Yield new unnormalized and normalized basis:\n{}\n{}'.format(orth_set[i][:], norm_orth_set[i][:]))
+        if verbosity == 'debug':
+            print('GRAM-SCHMIDT| Yield new unnormalized and normalized basis:\n{}\n{}'.format(orth_set[i][:], norm_orth_set[i][:]))
         orthlog.append(i)
 
     if mode == 'column':
