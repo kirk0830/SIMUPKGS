@@ -93,7 +93,9 @@ def dot(mat_a, mat_b):
         return mat_out
     else:
         print('ERROR! Number of columns of matrix A does not equal to number of rows of matrix B!')
-        raise TypeError
+        print('Matrix A: ({}, {})'.format(nrow_a, ncol_a))
+        print('Matrix B: ({}, {})'.format(nrow_b, ncol_b))
+        exit()
 
 def pivot(mat_in, row_num, mode = 'partial'):
 
@@ -238,3 +240,49 @@ def roundoff(mat_in, decimal = 10):
         for icol in range(ncol):
             mat_out[irow][icol] = round(mat_out[irow][icol], decimal)
     return mat_out
+
+def matrix_print(mat_in, decimal = False, comma = False):
+
+    nline = len(mat_in)
+    aprxed_mat = deepcopy(mat_in)
+    if decimal:
+
+        aprxed_mat = roundoff(mat_in = mat_in, decimal = decimal)
+
+    for iline in range(nline):
+
+        if iline == 0:
+            print('MATRIX PRINT>>> \n[')
+        if comma:
+            if iline != nline-1:
+                ifcomma = ', '
+            else:
+                ifcomma = ''
+            print(aprxed_mat[iline][:]+ifcomma)
+        else:
+            print(aprxed_mat[iline][:])
+        if iline == nline-1:
+            print(']')
+
+def unitary_transform(U, mat):
+
+    mat_out = deepcopy(mat)
+    Ut = transpose(U)
+    mat_out = dot(Ut, mat_out)
+    mat_out = dot(mat_out, U)
+
+    return mat_out
+
+def symm_check(mat):
+
+    nrow = len(mat)
+    ncol = len(mat[-1][:])
+    if nrow != ncol:
+
+        return False
+    for irow in range(nrow):
+        for icol in range(irow, ncol):
+            if mat[irow][icol] != mat[icol][irow]:
+                return False
+    
+    return True
