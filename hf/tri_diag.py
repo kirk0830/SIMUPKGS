@@ -1,4 +1,4 @@
-from jacobi_diag import jacobi_diag as jacobi
+from givens import tri_diag as givens_tdiag
 from householder import householder as hh
 import _mat_lib as mlib
 from copy import deepcopy
@@ -27,9 +27,8 @@ def trid(mat_in, mode = 'givens'):
 
     if mode == 'givens':
         
-        [tridiag, U] = jacobi(
+        [tridiag, U] = givens_tdiag(
             mat_in = mat_in,
-            tri_diag = True,
             verbosity = 'silent'
         )
     elif mode == 'householder':
