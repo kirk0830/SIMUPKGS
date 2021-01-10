@@ -1,31 +1,71 @@
+% any comments can be added only when starts with '%' between sections
+$SYSTEM
+Pt2c.reax12.ts
+$END
+
+$GENERAL
+nbfunc = 1
+comb-rule = 1
+gen-pairs = False
+fudgeLJ = 1.0
+fudgeQQ = 1.0
+molecule = 'a_whole'
+num_mole = 1
+nrexcl = 3
+$END
+% 'GENERAL' section parameter interpretation:
+% nbfunc: 
+% comb-rule:
+% gen-pairs:
+% fudgeLJ, fudgeQQ:
+% molecule: name of molecule
+% num_mole: number of present molecule
+% nrexcl: exclusion criteria, for interactions of which particles stay far away from particle of interest
+%         more than 'nrexcl'*bond_length will be omitted
+
 $ELEMENT
 C O Pt Fe Mg Al
-$END ELEMENT
+$END
+
+$ATOM
+
+$END
+
+$INCLUDE
+rt41c5.itp
+spc.itp
+$END
 
 $BOND
- C  O 14400 1.20
-Pt  C  6000 2.00
- O Pt  9000 2.10
- O Fe  8000 2.00
- O Mg 10000 2.00
- O Al 12000 1.70
-Pt Fe  5000 3.00
-Pt Mg  3000 3.00
-Pt Al  3000 3.00
+ C  O 1 14400 1.20
+Pt  C 1  6000 2.00
+ O Pt 1  9000 2.10
+ O Fe 1  8000 2.00
+ O Mg 1 10000 2.00
+ O Al 1 12000 1.70
+Pt Fe 1  5000 3.00
+Pt Mg 1  3000 3.00
+Pt Al 1  3000 3.00
 $END
 
 $ANGLE
- O  C Pt 100 180.0
- O Pt  O 140  90.0
- O Fe  O 130  90.0
- O Mg  O  80 109.5
- O Al  O 200  90.0
+ O  C Pt 1 100 180.0
+ O Pt  O 1 140  90.0
+ O Fe  O 1 130  90.0
+ O Mg  O 1  80 109.5
+ O Al  O 1 200  90.0
 $END
 
 $DIHEDRAL
- O  C Pt  O 100 120
- C Pt  O Fe 130 120
- O Mg  O Al  80 120
- O Al  O Pt 150 120
- O Al  O Fe 100 120
+ O  C Pt  O 1 100 120 1
+ C Pt  O Fe 1 130 120 3
+ O Mg  O Al 1  80 120 2
+ O Al  O Pt 1 150 120 4
+ O Al  O Fe 1 100 120 4
+$END
+
+$COMMENTS
+ This is a test paragraph that will be printed on topology file
+ Line 2, 
+ Line 3
 $END
