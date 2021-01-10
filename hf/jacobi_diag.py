@@ -14,7 +14,7 @@ def op_gen(size, U, irow, icol):
 
     return P
 
-def ijacobi(sym_mat_in, tri_diag = False, verbosity = 'silent'):
+def ijacobi(sym_mat_in, tri_diag = False, skipthr = 1E-10, verbosity = 'silent'):
 
     nline = len(sym_mat_in)
     mat_op_on = deepcopy(sym_mat_in)
@@ -29,6 +29,8 @@ def ijacobi(sym_mat_in, tri_diag = False, verbosity = 'silent'):
     for icol in range(nline-1):
         for irow in range(icol+1+row_skip, nline):
 
+            if abs(mat_op_on[irow][icol]/nline**2) < skipthr:
+                continue
             # guarantee irow >= icol, i.e., only concentrate on lower triangonal part
             sub_mat = [
                 [mat_op_on[icol][icol], mat_op_on[icol][irow]],
@@ -130,6 +132,7 @@ def jacobi_diag(mat_in, tri_diag = False, conv_level = 3, max_iter = 10, verbosi
     [_, rawDiag, op] = ijacobi(
         sym_mat_in = mat_in,
         tri_diag = tri_diag,
+        skipthr = conv_thr,
         verbosity = verbosity
     )
 
