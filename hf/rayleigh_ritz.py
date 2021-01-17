@@ -19,6 +19,7 @@ def rayleigh_ritz_diag(
     sort_eigval = 'lowest', 
     batch_size = -1, 
     conv_thr = 1E-6, 
+    conv_calc_mode = 'norm1',
     max_iter = 50, 
     verbosity = 'silent'
     ):
@@ -29,14 +30,17 @@ def rayleigh_ritz_diag(
     mat_in: must be SQUARED matrix and in FLOAT data type\n
     num_eigen: number of eigen vectors and values want to find\n
     preconditioner: preconditioner of residual vector, avaliable options: 'full', 'single', 'dj' or 'none'.\n
-    >For 'full' mode, (D_A - theta_i*I)|t_i> = |r_i>\n
+    >For 'full' mode (recommended, most stable), (D_A - theta_i*I)|t_i> = |r_i>\n
     >, where DA is diagonal matrix that only has non-zero element on its diagonal, D_A[i][i] = A[i][i]\n
-    >For 'single' mode, (A[i][i] - theta_i)|t_i> = |r_i>\n
-    >For 'dj' (Davidson-Jacobi) mode:\n
+    >For 'single' mode (simple but always cannot converge), (A[i][i] - theta_i)|t_i> = |r_i>\n
+    >For 'dj' (Davidson-Jacobi) mode (accurate but singluarity-unstable):\n
     > (I-|y_i><y_i|)(D_A - theta_i*I)(I-|y_i><y_i|)|t_i> = |r_i>\n
     > |t_i> will be solved by LU-decomposition and forward/back substitution method, relatively time-costly\n
     >For 'none' mode, preconditioner won't be used, i.e.: |t_i> = |r_i>\n
     diag_mode: 'jacobi', 'householder' or 'np' (numpy integrated). Basic algorithm for diagonalize matrix in subspace\n
+    dj_solver: 'lu' or 'np', the most two fast algorithm for solving linear equation\n
+    >For 'lu', use LU-decompsition and forward/backsubstitution\n
+    >For 'np', use numpy.linalg.solve function\n
     batch_size: total number of dimensions of subspace, only will be read-in if mode is set to
     'batch'\n
     sort_eigval: 'lowest', 'highest' or 'None'\n
@@ -44,6 +48,12 @@ def rayleigh_ritz_diag(
     >>For 'highest', sort eigenvalues in an decreasing order\n
     >>For 'None', will not sort eigenvalues\n
     conv_thr: convergence threshold of eigen values for 'batch' mode, has no effect in other modes\n
+    conv_calc_mode: 'abs', 'sqr', 'sum', 'norm1' or 'norm2', for measuring lists of eigenvalues of adjacent two iteration steps\n
+    >>For 'abs', use absolute value of difference between element in old list and corresponding one in the new list\n
+    >>For 'sqr', use squared value of ...\n
+    >>For 'sum', just sum up all differences\n
+    >>For 'norm1', use norm of difference between two lists that treated as vectors\n
+    >>For 'norm2', only measure difference between norms of vectorized old and new list\n
     max_iter: maximum number of iterations for 'batch' mode, has no effect in other modes\n
     # output description\n
     [eigval_list, eigvec_list]\n
@@ -126,15 +136,16 @@ def rayleigh_ritz_diag(
         eigval_conv = mlib.list_diff(
             list_old = eigval_list0,
             list_new = eigval_list[0:num_eigen],
-            mode = 'norm'
+            mode = conv_calc_mode
         )
         eigval_list0 = eigval_list[0:num_eigen]
         # -----------------------------------------------------------
 
 
         # -----------------------preprocessing-----------------------
+        # rearrange of eigenvectors in subspace
         for idim in range(batch_size):
-# SHOULD change upper bound of loop "batch_size' to dim -- 20210117
+
             templist = [eigvec_set[idim][idx] for idx in sort_idx]
             eigvec_set[idim][:] = templist
 
@@ -161,12 +172,12 @@ def rayleigh_ritz_diag(
                     ti = r[icompo][0]/(mat_op_on[icompo][icompo]-eigval_list[ivec])
                     t.append(ti)                                    # new vector to append to U,           bra
             elif preconditioner == 'single':
-# note that list eigvec_list is already rearranged, diagnoal element corresponds to one certain eigen vale
-# should be found by A[sort_idx[ivec]][...]
-                t = [-ri[0]/(mat_op_on[ivec][ivec]-eigval_list[ivec]) for ri in r]#                        bra
+
+                orig_idx = sort_idx[ivec]
+                t = [-ri[0]/(mat_op_on[orig_idx][orig_idx]-eigval_list[ivec]) for ri in r]#                         bra
             elif preconditioner == 'dj':
                 r = [[-r[idim][0]] for idim in range(dim)]
-                # (I-|y_i><y_i|)(D_A - theta_i*I)(I-|y_i><y_i|)|t_i> = -|r_i>
+                # (I-|y_i><y_i|)(D_A - theta_i*I)(I-|y_i><y_i|)|t_i> = |r_i>
                 perp_op = mlib.minus(
                     I, 
                     mlib.ketbra(
@@ -227,6 +238,5 @@ def rayleigh_ritz_diag(
         if verbosity != 'silent':
 
             print('RAYLEIGH-RITZ| Step {}: conv = {}, conv_thr = {}'.format(istep, eigval_conv, conv_thr))
-
 
     return [eigval_list[0:num_eigen], U[:][0:num_eigen]]

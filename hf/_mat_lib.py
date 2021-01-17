@@ -374,6 +374,12 @@ def diag_to_list(diag_mat_in):
 
 def list_diff(list_old, list_new, mode = 'abs'):
 
+    if mode == 'norm2':
+
+        norm_old = mod_of_vec(list_old)
+        norm_new = mod_of_vec(list_new)
+        return abs(norm_new-norm_old)
+
     list_diff = minus(list_new, list_old)
     result = 0.0
     for idiff in list_diff:
@@ -384,11 +390,11 @@ def list_diff(list_old, list_new, mode = 'abs'):
             result += idiff**2
         elif mode == 'sum':
             result += idiff
-        elif mode == 'norm':
+        elif mode == 'norm1':
             result += idiff**2
         else:
             print('MLIB| (List-diff) present mode \'{}\' selected is not supported yet'.format(mode))
-    if mode == 'norm':
+    if mode == 'norm1':
         return sqrt(result)
     else:
         return result
