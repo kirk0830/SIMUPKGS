@@ -107,8 +107,7 @@ def jacobi_diag(mat_in, tri_diag = False, conv_level = 3, max_iter = 10, verbosi
     on screen. if set to 'debug', huge amount of information will be printed, use with
     caution!\n
     # output description\n
-    [orig_mat, diag, U]\n
-    orig_mat: original matrix\n
+    [diag, U]\n
     diag: diagonalized matrix\n
     U: unitary operator\n
     # formula\n

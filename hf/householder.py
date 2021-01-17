@@ -45,8 +45,13 @@ def householder(vec_in, vec_desti = [], mode = 'reduce', verbosity = 'silent'):
              +'vector = {}\n'.format(vec_in)
              +'destination = {}\n'.format(vec_desti)
              +'norm vector (original) = {}\n'.format(u)
-             +'normalized norm vector = {}\n'.format(v)
-             +'identity operator generated:\n{}\n'.format(I)
+             +'normalized norm vector = {}'.format(v))
+        print('2|v><v| tensor product  =')
+        mlib.matrix_print(vvT)
+        print('identity operator generated:\n{}\n'.format(I)
              +'Householder operator:\n{}'.format(P))
     return P
 
+def hshldr_op(mat, hhop):
+
+    pass

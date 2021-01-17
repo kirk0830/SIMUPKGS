@@ -11,7 +11,6 @@ def qr(mat_in, mode = 'householder', verbosity = 'silent'):
     # input requirement\n
     mat_in: matrix to perform QR decomposition, only squared matrix is supported\n
     mode: 'householder' (recommended) or 'schmidt' (not recommended, bug exists, unsolved)\n
-    ***WARNING*** there is something wrong in schmidt mode, do not use it presently, and note that det of mat_in should not be zero!\n
     # output description\n
     [original matrix, Q matrix, R matrix]
     """
@@ -46,7 +45,7 @@ def qr(mat_in, mode = 'householder', verbosity = 'silent'):
 
     elif mode == 'schmidt':
 
-        print('QR| ***warning*** There seems one bug that has not been discovered yet, although Gram-Schmidt works well.')
+        #print('QR| ***warning*** There seems one bug that has not been discovered yet, although Gram-Schmidt works well.')
         [_, Q] = gs(mat_in, mode = 'column', verbosity = verbosity)
 
         Q_t = mlib.transpose(Q)

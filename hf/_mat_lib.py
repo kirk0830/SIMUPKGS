@@ -29,18 +29,22 @@ def ones(n, m = -1):
         ones_mat.append(deepcopy(line))
     return ones_mat
 
-def eye(n):
+def eye(n, m = -1, amplify = 1.0):
 
     eye_mat = []
 
+    if (n == m) or (m <= 0):
+        m = n
+    
     for irow in range(n):
         line = []
-        for icol in range(n):
+        for icol in range(m):
             if irow == icol:
-                line.append(1.0)
+                line.append(1.0 * amplify)
             else:
                 line.append(0.0)
         eye_mat.append(deepcopy(line))
+
     return eye_mat
 
 def _cut_mat(mat_in, i, j):
@@ -72,30 +76,83 @@ def det(mat_in):
             expr += (-1)**(iline+2)*mat_in[iline][0] * det(_cut_mat(mat_in = mat_in, i = iline, j = 0))
         return expr
 
-def dot(mat_a, mat_b):
+def dot(mat_a, mat_b, mode = 'matmat'):
 
-    nrow_a = len(mat_a)
-    ncol_a = len(mat_a[0][:])
-    nrow_b = len(mat_b)
-    ncol_b = len(mat_b[0][:])
+    """
+    # Usage\n
+    mode: 'matmat', 'matket' or 'bramat'\n
+    >'matmat': multiply one matrix with the other\n
+    >'matket': rotate one ket (mat_b) |> by matrix (mat_a)\n
+    >'bramat': rotate one bra (mat_a) <| by matrix (mat_b)
+    """
+    if mode == 'matmat':
 
-    if ncol_a == nrow_b:
-        mat_out = []
-        for irow in range(nrow_a):
-            line = []
-            for icol in range(ncol_b):
-                element = 0
-                for i in range(ncol_a):
-                    element += mat_a[irow][i]*mat_b[i][icol]
-                line.append(element)
-            mat_out.append(line)
-        
-        return mat_out
-    else:
-        print('ERROR! Number of columns of matrix A does not equal to number of rows of matrix B!')
-        print('Matrix A: ({}, {})'.format(nrow_a, ncol_a))
-        print('Matrix B: ({}, {})'.format(nrow_b, ncol_b))
-        exit()
+        nrow_a = len(mat_a)
+        ncol_a = len(mat_a[0][:])
+        nrow_b = len(mat_b)
+        ncol_b = len(mat_b[0][:])
+
+        if ncol_a == nrow_b:
+            mat_out = []
+            for irow in range(nrow_a):
+                line = []
+                for icol in range(ncol_b):
+                    element = 0
+                    for i in range(ncol_a):
+                        element += mat_a[irow][i]*mat_b[i][icol]
+                    line.append(element)
+                mat_out.append(line)
+            
+            return mat_out
+        else:
+            print('MLIB| (DOT) ERROR! Number of columns of matrix A does not equal to number of rows of matrix B!')
+            print('Matrix A: ({}, {})'.format(nrow_a, ncol_a))
+            print('Matrix B: ({}, {})'.format(nrow_b, ncol_b))
+            exit()
+
+    elif mode == 'matket':
+
+        nrow_a = len(mat_a)
+        ncol_a = len(mat_a[0][:])
+        nrow_b = len(mat_b)
+
+        if ncol_a == nrow_b:
+
+            ket_out = []
+            for irow in range(nrow_a):
+                component = 0
+                for icol in range(nrow_b):
+                    component += mat_a[irow][icol]*mat_b[icol][0]
+                ket_out.append([component])
+
+            return ket_out
+        else:
+            print('MLIB| (DOT) ERROR! Number of columns of matrix A does not equal to number of rows of matrix B!')
+            print('Matrix A: ({}, {})'.format(nrow_a, ncol_a))
+            print('Matrix B: ({}, {})'.format(nrow_b, '1'))
+            exit()
+
+    elif mode == 'bramat':
+
+        ncol_a = len(mat_a)
+        nrow_b = len(mat_b)
+        ncol_b = len(mat_b[0][:])
+
+        if ncol_a == nrow_b:
+
+            bra_out = []
+            for icol in range(ncol_a):
+                component = 0
+                for irow in range(ncol_a):
+                    component += mat_a[irow]*mat_b[irow][icol]
+                bra_out.append(component)
+
+            return bra_out
+        else:
+            print('MLIB| (DOT) ERROR! Number of columns of matrix A does not equal to number of rows of matrix B!')
+            print('Matrix A: ({}, {})'.format('1', ncol_a))
+            print('Matrix B: ({}, {})'.format(nrow_b, ncol_b))
+            exit()
 
 def pivot(mat_in, row_num, mode = 'partial'):
 
@@ -131,6 +188,8 @@ def mod_of_vec(vec):
 def braket(bra, ket, mode = '2bra', decimal = False):
 
     """
+    scalar (inner) product of two vectors.
+    <|>\n
     bra: <|, row vector, left vector\n
     ket: |>, column vector, right vector\n
     This function is for calculating scalar product between two vectors,
@@ -178,26 +237,41 @@ def transpose(mat_in):
 from _in_matrix_op import matrix_minus as minus
 from _in_matrix_op import matrix_plus as plus
 
-def ketbra(bra, ket, mode = '2bra', amplify = 1):
+def ketbra(ket, bra, mode = '2bra', amplify = 1.0):
+
+    """
+    tensor product |><|\n
+    mode: 'ketbra', '2ket' or '2bra'
+    """
+    # standard format...
+    # bra: row vector: <|: [b1, b2, b3, ...]
+    # ket: col vector: |>: [[k1], [k2], [k3], ...]
 
     ncol = len(bra)
     nrow = len(ket)
 
-    span = zeros(n = len(ket), m = len(bra))
+    tensor = zeros(n = len(ket), m = len(bra))
 
     if mode == 'ketbra':
 
-        pass
+        for irow in range(nrow):
+            for icol in range(ncol):
+
+                tensor[irow][icol] = bra[icol]*ket[irow][-1]*amplify
     elif mode == '2ket':
 
-        pass
+        for irow in range(nrow):
+            for icol in range(ncol):
+
+                tensor[irow][icol] = bra[icol][-1]*ket[irow][-1]*amplify
     elif mode == '2bra':
 
         for irow in range(nrow):
             for icol in range(ncol):
-                span[irow][icol] = bra[icol]*ket[irow]*amplify
+
+                tensor[irow][icol] = bra[icol]*ket[irow]*amplify
     
-    return span
+    return tensor
 
 def combine_block(mat1, mat2, mode = 'diag'):
 
@@ -286,3 +360,69 @@ def symm_check(mat):
                 return False
     
     return True
+
+def diag_to_list(diag_mat_in):
+
+    nrow = len(diag_mat_in)
+    eigval_list = []
+
+    for irow in range(nrow):
+
+        eigval_list.append(diag_mat_in[irow][irow])
+    
+    return eigval_list
+
+def list_diff(list_old, list_new, mode = 'abs'):
+
+    list_diff = minus(list_new, list_old)
+    result = 0.0
+    for idiff in list_diff:
+
+        if mode == 'abs':
+            result += abs(idiff)
+        elif mode == 'sqr':
+            result += idiff**2
+        elif mode == 'sum':
+            result += idiff
+        elif mode == 'norm':
+            result += idiff**2
+        else:
+            print('MLIB| (List-diff) present mode \'{}\' selected is not supported yet'.format(mode))
+    if mode == 'norm':
+        return sqrt(result)
+    else:
+        return result
+
+def bra2ket(bra):
+
+    return [[ibra] for ibra in bra]
+
+def ket2bra(ket):
+
+    return [iket[0] for iket in ket]
+
+def normalize(vec, mode = 'bra'):
+
+    if mode == 'bra':
+
+        vec_op_on = deepcopy(vec)
+    elif mode == 'ket':
+
+        vec_op_on = vec[:][0]
+
+    norm = mod_of_vec(vec_op_on)
+
+    bralist = []
+    for ivec in vec_op_on:
+
+        if (ivec == 0) and (norm == 0):
+            bralist.append(1.0)
+        else:
+            bralist.append(ivec/norm)
+
+    if mode == 'bra':
+
+        return bralist
+    elif mode == 'ket':
+        
+        return(bra2ket(bralist))
