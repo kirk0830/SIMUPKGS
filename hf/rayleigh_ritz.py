@@ -134,7 +134,7 @@ def rayleigh_ritz_diag(
 
         # -----------------------preprocessing-----------------------
         for idim in range(batch_size):
-
+# SHOULD change upper bound of loop "batch_size' to dim -- 20210117
             templist = [eigvec_set[idim][idx] for idx in sort_idx]
             eigvec_set[idim][:] = templist
 
@@ -161,11 +161,12 @@ def rayleigh_ritz_diag(
                     ti = r[icompo][0]/(mat_op_on[icompo][icompo]-eigval_list[ivec])
                     t.append(ti)                                    # new vector to append to U,           bra
             elif preconditioner == 'single':
-
-                t = [-ri[0]/(mat_op_on[ivec][ivec]-eigval_list[ivec]) for ri in r]#                         bra
+# note that list eigvec_list is already rearranged, diagnoal element corresponds to one certain eigen vale
+# should be found by A[sort_idx[ivec]][...]
+                t = [-ri[0]/(mat_op_on[ivec][ivec]-eigval_list[ivec]) for ri in r]#                        bra
             elif preconditioner == 'dj':
                 r = [[-r[idim][0]] for idim in range(dim)]
-                # (I-|y_i><y_i|)(D_A - theta_i*I)(I-|y_i><y_i|)|t_i> = |r_i>
+                # (I-|y_i><y_i|)(D_A - theta_i*I)(I-|y_i><y_i|)|t_i> = -|r_i>
                 perp_op = mlib.minus(
                     I, 
                     mlib.ketbra(
