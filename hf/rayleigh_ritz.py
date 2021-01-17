@@ -15,6 +15,7 @@ def rayleigh_ritz_diag(
     num_eigen, 
     preconditioner = 'full', 
     diag_mode = 'householder', 
+    dj_solver = 'lu',
     sort_eigval = 'lowest', 
     batch_size = -1, 
     conv_thr = 1E-6, 
@@ -91,7 +92,7 @@ def rayleigh_ritz_diag(
 
             [eigval_list, eigvec_set] = hdiag(
                 hmat_in = submat,
-                mode = 'householder',
+                mode = diag_mode,
                 eigval_format = 'list', 
                 conv_level = 8,
                 max_iter = 50,
@@ -181,33 +182,38 @@ def rayleigh_ritz_diag(
                 # final assembly
                 dj_op = mlib.unitary_transform(U = perp_op, mat = full_prcdtnr)
                 # solve D|t> = |r>
-                
+                if dj_solver == 'lu':
+                    
+                    if verbosity == 'high':
+                        print('RAYLEIGH-RITZ| Start LU-decomposition...\nRAYLEIGH-RITZ| LU-decomposition carried out on matrix:')
+                    [_, L_dj, U_dj] = lu(mat_in = dj_op)
+                    if verbosity == 'high':
+                        print('RAYLEIGH-RITZ| Start forwardsubstitution...')
+                    y_dj = sbssolv(
+                        triang_mat = L_dj,
+                        b = mlib.ket2bra(r),
+                        mode = 'lower'
+                    )
+                    if verbosity == 'high':
+                        print('RAYLEIGH-RITZ| Start backsubstitution...')
+                    t = sbssolv(
+                        triang_mat = U_dj,
+                        b = y_dj,
+                        mode = 'upper'
+                    )                                                 # new vector to append to U,           bra
+                elif dj_solver == 'np':
+
+                    t = np.linalg.solve(dj_op, mlib.ket2bra(r))
                 if verbosity == 'high':
-                    print('RAYLEIGH-RITZ| Start LU-decomposition...\nRAYLEIGH-RITZ| LU-decomposition carried out on matrix:')
-                [_, L_dj, U_dj] = lu(mat_in = dj_op)
-                if verbosity == 'high':
-                    print('RAYLEIGH-RITZ| Start forwardsubstitution...')
-                y_dj = sbssolv(
-                    triang_mat = L_dj,
-                    b = mlib.ket2bra(r),
-                    mode = 'lower'
-                )
-                if verbosity == 'high':
-                    print('RAYLEIGH-RITZ| Start backsubstitution...')
-                t = sbssolv(
-                    triang_mat = U_dj,
-                    b = y_dj,
-                    mode = 'upper'
-                )                                                 # new vector to append to U,           bra
-                if verbosity == 'high':
+
                     print('RAYLEIGH-RITZ| New |t> generated!')
             elif preconditioner == 'none':
 
-                t = r
+                t = mlib.ket2bra(r)
             else:
 
                 print('RAYLEIGH-RITZ| ***WARNING***: preconditioner required is not recognized, use \'none\' instead.')
-                t = r
+                t = mlib.ket2bra(r)
 
             t = mlib.normalize(t)
             U_new.append(t)
