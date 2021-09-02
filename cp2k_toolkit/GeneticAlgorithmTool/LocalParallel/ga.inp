@@ -1,4 +1,7 @@
 # it looks like qe input script, right?
+# to run Genetic Algorithm locally in parallel, use command:
+# python GaPLocal.py ga.inp
+# be careful when you want to change to another calculator!
 # Part 1. global overall parameters
 verbosity = 'DEBUG'
 std_redirect = 'stdout'
