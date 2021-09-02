@@ -23,7 +23,7 @@ import os
 
 std_redirect_file = 'ga.out'
 calc_config='ga.calc_cp2k_xtb.py'
-database_name = 'gadb-Pt8O16.db'
+database_name = 'gadb.db'
 tmp_folder = 'tmp_folder'
 
 if os.path.isfile(std_redirect_file):
@@ -42,17 +42,17 @@ def jtg(job_name, traj_file):
 
     s += 'source /public4/soft/modules/module.sh\n'
 
-    s += 'module load mpi/intel/17.0.5-cjj-public4-public4\n' 
+    s += 'module load *******/17.0.5-cjj-public4-public4\n' 
     s += 'module load libxsmm/1.15-icc17-lcc-public4\n'
     s += 'module load libint/2.6.0-cp2k-icc17-lcc-public4\n'
     s += 'module load libxc/4.3.4-icc17-ls-public4\n'
     s += 'module load fftw/3.3.8-mpi-public4\n'
 
-    s += 'export PATH=/public4/home/sc51049/miniconda3/bin:$PATH\n'
-    s += 'export PATH=/public4/home/sc51049/cp2k_8.1_modified/cp2k-8.1.0/exe/Linux-x86-64-intel-minimal:$PATH\n'
+    s += 'export PATH=/*******/*******/*******/miniconda3/bin:$PATH\n'
+    s += 'export PATH=/*******/*******/*******/cp2k_8.1_modified/cp2k-8.1.0/exe/Linux-x86-64-intel-minimal:$PATH\n'
 
     s += 'export ASE_CP2K_COMMAND=\"mpirun -n 64 cp2k_shell.psmp\"\n'
-    s += 'export CP2K_DATA_DIR=\"/public4/home/sc51049/POTENTIAL_AND_BASIS\"\n'
+    s += 'export CP2K_DATA_DIR=\"/*******/*******/*******/POTENTIAL_AND_BASIS\"\n'
     s += 'python {} {}\n'.format(calc_config, traj_file)
     return s
 
