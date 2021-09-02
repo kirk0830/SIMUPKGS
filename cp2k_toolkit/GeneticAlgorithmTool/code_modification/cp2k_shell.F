@@ -569,7 +569,7 @@ CONTAINS
       INTEGER                                            :: i, ierr, iostat, n_atom
       REAL(KIND=dp)                                      :: max_change
       REAL(KIND=dp), ALLOCATABLE, DIMENSION(:)           :: old_pos, pos
-	  LOGICAL                                            :: bool_ASE_POS=.FALSE.
+      LOGICAL                                            :: bool_ASE_POS=.FALSE.
 	  
       IF (.NOT. parse_env_id(arg1, shell)) RETURN
       CALL get_natom(shell%env_id, n_atom, ierr)
@@ -584,14 +584,14 @@ CONTAINS
             IF (.NOT. my_assert(n_atom == SIZE(pos), 'setpos invalid number of atoms', shell)) RETURN
             READ (581, *, iostat=iostat) pos
             IF (.NOT. my_assert(iostat == 0, 'setpos read coords failed', shell)) RETURN
-			CLOSE (581)
-		 ELSE
+            CLOSE (581)
+         ELSE
             READ (*, *, iostat=iostat) n_atom
             IF (.NOT. my_assert(iostat == 0, 'setpos read n_atom failed', shell)) RETURN
             IF (.NOT. my_assert(n_atom == SIZE(pos), 'setpos invalid number of atoms', shell)) RETURN
             READ (*, *, iostat=iostat) pos
             IF (.NOT. my_assert(iostat == 0, 'setpos read coords failed', shell)) RETURN
-		 END IF
+         END IF
          pos(:) = pos(:)/shell%pos_fact
          READ (*, '(a)', iostat=iostat) line
          IF (.NOT. my_assert(iostat == 0, 'setpos read END failed', shell)) RETURN
