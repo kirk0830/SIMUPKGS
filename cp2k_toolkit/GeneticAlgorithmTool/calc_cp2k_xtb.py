@@ -1,3 +1,4 @@
+# if you dont want to use xTB, you can directly change METHOD of QS or delete this line
 from ase.optimize import BFGS
 from ase.io import read, write
 from ase.calculators.cp2k_sendFile import CP2K
