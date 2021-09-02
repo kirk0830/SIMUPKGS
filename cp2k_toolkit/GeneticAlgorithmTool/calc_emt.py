@@ -5,7 +5,7 @@ from ase.ga.relax_attaches import VariansBreak
 import sys
 
 fname = sys.argv[1]
-
+# it is almost unchanged and directly copy from ASE website
 print('Now relaxing {0}'.format(fname))
 a = read(fname)
 
