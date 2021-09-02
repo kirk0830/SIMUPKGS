@@ -16,5 +16,5 @@ parameterization = False
 n_parallel = 5
 t_sleep_then_check = 10
 # Part 4. external calculator definition
-external_calc = 'calc.py'
+external_calc = 'calc_emt.py'
 #
