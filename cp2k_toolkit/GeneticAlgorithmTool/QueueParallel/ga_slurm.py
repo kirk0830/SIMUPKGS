@@ -22,8 +22,8 @@ from time import sleep
 import os
 
 std_redirect_file = 'ga.out'
-calc_config='calc_cp2k_modi_xtb_iso.py'
-database_name = 'gadb-Pt8O8.db'
+calc_config='ga.calc_cp2k_xtb.py'
+database_name = 'gadb-Pt8O16.db'
 tmp_folder = 'tmp_folder'
 
 if os.path.isfile(std_redirect_file):
@@ -38,6 +38,7 @@ def jtg(job_name, traj_file):
     s += '#SBATCH -N 1\n'
     s += '#SBATCH -n 64\n'
     s += '#SBATCH -J {0}\n'.format(job_name)
+    s += '#SBATCH -x v1805\n'
 
     s += 'source /public4/soft/modules/module.sh\n'
 
@@ -59,7 +60,7 @@ def redirect_print(strinfo):
     '''
     redirect print function to file
     '''
-    f_std_redirect_f.writelines(strinfo)
+    f_std_redirect_f.writelines(strinfo+'\n')
 
 population_size = 20
 mutation_probability = 0.3
@@ -71,7 +72,7 @@ job_prefix = database_name[5:-3]
 pbs_run = PBSQueueRun(da,
                       tmp_folder=tmp_folder,
                       job_prefix=job_prefix,
-                      n_simul=3,
+                      n_simul=10,
                       job_template_generator=jtg,
                       qsub_command='sbatch',
                       qstat_command='squeue')
