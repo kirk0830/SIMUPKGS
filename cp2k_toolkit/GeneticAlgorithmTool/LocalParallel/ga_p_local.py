@@ -220,7 +220,12 @@ if write_xyz > 0:
     candidates_list = da.get_all_relaxed_candidates()
     idx_candi = 1
     for icandi in candidates_list:
-        write('candidate-{}.xyz'.format(idx_candi), icandi)
+        if idx_candi <= write_xyz:
+            write('candidate-{}.xyz'.format(idx_candi), icandi)
+            ga_print(4, 'DEBUG| save No. {} candidate in xyz format...'.format(idx_candi))
+        else:
+            break
+        icandi += 1
 f_out.close()
 if std_redirect == 'stdout':
     remove(f_name_out)
