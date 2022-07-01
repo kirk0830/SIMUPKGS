@@ -10,7 +10,10 @@ def xyz2cif(
     alpha = 90, 
     beta = 90, 
     gamma = 90,
-    multiple_cell = 1
+    multiple_cell = 1,
+    tx = 0.,
+    ty = 0.,
+    tz = 0.
     ):
     '''
     # XYZ -> CIF converter\n
@@ -22,7 +25,7 @@ def xyz2cif(
     primitive cell again after cell optimization, use multiple_cell = [A, B, C], where A, B and C are times multiplied by 
     primitive cell.
     '''
-    if len(multiple_cell) == 1:
+    if type(multiple_cell) == int:
         scale = [1., 1., 1.]
     else:
         scale = multiple_cell
@@ -95,9 +98,9 @@ def xyz2cif(
                     words = line.split(' ')
                     words = [word for word in words if word != '']
                     r = [
-                        [float(words[1])],
-                        [float(words[2])],
-                        [float(words[3])]
+                        [float(words[1]) + tx],
+                        [float(words[2]) + ty],
+                        [float(words[3]) + tz]
                         ]
                     r = np.array(r)
                     frac_r = np.matmul(O_inv, r)
@@ -112,24 +115,57 @@ def xyz2cif(
                     line2write += '  Biso   1.000  '
                     line2write += words[0]
                     line2write += '\n'
-                    if len(multiple_cell) == 1:
+                    if type(multiple_cell) == int:
                         CIFf.writelines(line2write)
                     else:
                         if (abs(frac_r[0][0]) >= 1) or (abs(frac_r[1][0]) >= 1) or (abs(frac_r[2][0]) >= 1):
                             pass
                         else:
                             CIFf.writelines(line2write)
+'''
+from sys import argv
 
+if len(argv) == 2:
+    xyz2cif(
+        XYZfname = argv[1]
+    )
+elif len(argv) == 5:
+    xyz2cif(
+        XYZfname = argv[1],
+        cell_a = argv[2],
+        cell_a = argv[3],
+        cell_a = argv[4]
+    )
+elif len(argv) == 6:
+    xyz2cif(
+        XYZfname = argv[1],
+        cell_a = argv[2],
+        cell_a = argv[3],
+        cell_a = argv[4],
+        multiple_cell = argv[5]
+    )
+elif len(argv) == 8:
+    xyz2cif(
+        XYZfname = argv[1],
+        cell_a = argv[2],
+        cell_a = argv[3],
+        cell_a = argv[4],
+        alpha = argv[5],
+        alpha = argv[6],
+        alpha = argv[7]
+    )
+'''
 # USAGE
-a = 12.3399094394
-b = 12.3399094394
-c = 13.2375217984
+
+a = 10.8681
+b = 10.8681
+c = 30.3527
 alpha = 90
 beta = 90
 gamma = 120
-multiple_cell = [5, 5, 2]
+multiple_cell = 1
 
-xyz2cif('graphite-pos-fin.xyz', a, b, c, alpha, beta, gamma, [5, 5, 2])
+xyz2cif('Rh1.YSZ-3M-site1-pos-fin.xyz', a, b, c, alpha, beta, gamma)
 
 # Contents of file graphite-pos-fin.xyz
 '''
