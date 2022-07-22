@@ -10,7 +10,7 @@ def lireVoronoi(
     nframe, 
     statistics = True, 
     motif = [], 
-    concat = False
+    concat2file = False
     ):
     '''
     # Input description:\n
@@ -51,7 +51,7 @@ def lireVoronoi(
                                 if i_voro == motif[idx_motif]:
                                     freq_motif[idx_motif] += 1
                         i_frame_voro.append(i_voro)
-                        if concat:
+                        if concat2file:
                             voro_concat.append(i_voro)
                 voro_dict[iframe] = i_frame_voro
                 if need_count_atoms and natom != 0:
@@ -60,13 +60,9 @@ def lireVoronoi(
         except FileNotFoundError:
             print('WARNING: file'+'\''+fname+'\''+'does not exist, skip!')
             nframe -= 1
-    if concat:
+    if concat2file:
         with open(file = header + '-concat.dat', mode = 'w', encoding = 'utf-8') as cf:
             for i_voro in voro_concat:
                 cf.writelines(i_voro+'\n')
     
-    if statistics:
-        freq_motif /= nframe
-        return voro_dict, freq_motif
-    else:
-        return voro_dict
+    return voro_dict, freq_motif, voro_concat
